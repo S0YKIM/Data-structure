@@ -58,26 +58,23 @@ int isArrayListFull(ArrayList* pList)
 예: 네 번째 인덱스에 5 추가
 0 1 2 3 x x // 0 1 2 x 3 x // 0 1 2 5 3 x // currentElementCount + 1
 */
+
 int addALElement(ArrayList* pList, int position, ArrayListNode element)
 {
-    if (isArrayListFull(pList) || position > pList->currentElementCount)
-        return (FALSE);
-    if (currentElementCount == 0)
-    {
-        pList->pElement[0].data = element.data;
-        pList->currentElementCount++;
-        return (TRUE);
-    }
-    else
-    {
-        for (int i = pList->currentElementCount; i > position; i--)
-        {
-            pList->pElement[i].data = pList->pElement[i-1].data;
-        }
-    	pList->pElement[position].data = element.data;
-        pList->currentElementCount++;
-        return (TRUE);
-    }
+	if (position < 0)
+		return (FALSE);
+	if (position < pList->maxElementCount && !isArrayListFull(pList))
+	{
+		for (int i = pList->currentElementCount; i > position; i--)
+		{
+			pList->pElement[i].data = pList->pElement[i - 1].data;
+		}
+		pList->pElement[position].data = element.data;
+		pList->currentElementCount++;
+		return TRUE;
+	}
+	else
+		return FALSE;
 }
 
 /*
@@ -154,6 +151,7 @@ void clearArrayList(ArrayList* pList)
 /*
 배열 리스트의 길이: 최대 원소 개수
 */
+
 int getArrayListLength(ArrayList* pList)
 {
     int result;
