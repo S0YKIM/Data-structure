@@ -131,7 +131,6 @@ void clearArrayList(ArrayList* pList)
     {
         pList->pElement[i] = 0;
     }
-    pList->maxElementCount = 0;
     pList->currentElementCount = 0;
 }
 
