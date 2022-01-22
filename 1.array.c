@@ -1,21 +1,13 @@
-/*
-배열 구현하기
-
-배열에 넣기
-배열에 빼기
-오버플로우 처리
-*/
-
 typedef struct ArrayListNodeType
 {
-  int data; // 사실상 4 bytes
+  int data;
 } ArrayListNode;
 
 typedef struct ArrayListType
 {
-  int maxElementCount;		// 최대 원소 개수 10
-  int currentElementCount;	// 현재 원소 개수 add -> +1 remove -> -1 =>
-  ArrayListNode *pElement;	// 원소 저장을 위한 1차원 배열 10 malloc(sizeof(ArrayListNode) * 10)
+  int maxElementCount;		// 최대 원소 개수 (예: 10개)
+  int currentElementCount;	// 현재 원소 개수 (예: add -> +1   remove -> -1)
+  ArrayListNode *pElement;	// 원소 저장을 위한 배열 포인터 (예: malloc(sizeof(ArrayListNode) * 10))
 } ArrayList;
 
 
@@ -29,7 +21,13 @@ ArrayList* createArrayList(int maxElementCount)
     ArrayList *array;
 
     array = (ArrayList *)malloc(sizeof(ArrayList));
+    if (!array)
+        return (NULL);
+    array->maxElementCount = maxElementCount;
+    array->currentElementCount = 0;
     array->pElement = (ArrayListNode *)malloc(sizeof(ArrayListNode) * maxElementCount);
+    if (!array->pElement)
+        return (NULL);
     return (array);
 }
 
@@ -53,12 +51,15 @@ int isArrayListFull(ArrayList* pList)
     return (FALSE);
 }
 
+/*
+배열의 원소 추가
+예: 네 번째 인덱스에 5 추가
+0 1 2 3 x x // 0 1 2 x 3 x // 0 1 2 5 3 x // currentElementCount + 1
+*/
 int addALElement(ArrayList* pList, int position, ArrayListNode element)
 {
     if ((position <= pList->currentElementCount) && !(isArrayListFull(pList)))
     {
-		// element.data 0 1 2 // 3 0 1 2
-		// 0 1 2 2 3// 0 1 5 2 3
         for (int i = pList->currentElementCount; i > position; i--)
         {
             pList->pElement[i].data = pList->pElement[i-1].data;
@@ -70,11 +71,16 @@ int addALElement(ArrayList* pList, int position, ArrayListNode element)
     return (FALSE);
 }
 
+/*
+배열의 원소 삭제
+예: 맨 앞의 인덱스 0 제거
+0 1 2 3 // 1 1 2 3 // 1 2 2 3 // 1 2 3 3 // 1 2 3 0 // currentElementCount - 1
+*/
+
 int removeALElement(ArrayList* pList, int position)
 {
     if (position < pList->currentElementCount)
     {
-		// 0 1 2 3 에서 0 제거 // 1 1 2 3 // 1 2 2 3 // 1 2 3 3 // 1 2 3 0 // currentElementCount - 1
         for (int i = position; i < pList->currentElementCount - 1; i++)
         {
             pList->pElement[i].data = pList->pElement[i+1].data;
@@ -88,7 +94,7 @@ int removeALElement(ArrayList* pList, int position)
 
 ArrayListNode* getALElement(ArrayList* pList, int position)
 {
-
+    if (position < pList->currentElementCount)
 }
 
 /*
