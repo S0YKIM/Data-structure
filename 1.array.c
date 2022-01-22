@@ -132,16 +132,21 @@ void displayArrayList(ArrayList* pList)
     printf("Current element count: %i\n", pList->currentElementCount);
     for (i = 0; i < pList->currentElementCount; i++)
     {
-        printf("Element[%i]: %i", i, pList->pElement[i]);
+        printf("Element[%i]: %i\n", i, pList->pElement[i]);
     }
 }
 
 /*
-pList 원소 초기화
+pList 모든 원소 데이터 0으로 초기화
 */
 void clearArrayList(ArrayList* pList)
 {
-
+    for (int i = 0; i < pList->currentElementCount; i++)
+    {
+        pList->pElement[i] = 0;
+    }
+    pList->maxElementCount = 0;
+    pList->currentElementCount = 0;
 }
 
 int getArrayListLength(ArrayList* pList)
