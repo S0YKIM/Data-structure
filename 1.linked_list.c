@@ -13,4 +13,72 @@ linked list 구현하기
 */
 
 #include "data_structure.h"
-#include "linkedlist.h"
+
+typedef struct ListNodeType
+{
+	int data;
+	struct ListNodeType* pLink; // 다음 노드의 주소
+} ListNode;
+
+typedef struct LinkedListType
+{
+	int currentElementCount;	// 현재 저장된 원소의 개수
+	ListNode headerNode;		// 헤더 노드(Header Node)
+} LinkedList;
+
+typedef struct singleNodeType
+{
+	int data;
+	struct singleNodeType* next;
+} singleNode;
+
+typedef struct doubleNodeType
+{
+	int data;
+	struct doubleNodeType* prev;
+	struct doubleNodeType* next;
+} doubleNode;
+
+
+
+LinkedList* createLinkedList()
+{
+    LinkedList* address;
+
+    address = (LinkedList*)malloc(sizeof(LinkedList));
+    if (!address)
+        return (NULL);
+    address->currentElementCount = 0;
+    address->headerNode = 0;
+    return (address);
+}
+
+int addLLElement(LinkedList* pList, int position, ListNode element)
+{
+
+}
+
+int removeLLElement(LinkedList* pList, int position)
+{
+
+}
+
+ListNode* getLLElement(LinkedList* pList, int position)
+{
+
+}
+
+void clearLinkedList(LinkedList* pList)
+{
+
+}
+
+int getLinkedListLength(LinkedList* pList)
+{
+
+}
+
+void deleteLinkedList(LinkedList* pList)
+{
+
+}
