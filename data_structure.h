@@ -6,15 +6,17 @@
 # include "arrayList.h"
 # include "linkedlist.h"
 
-typedef struct s_singleNode {
+typedef struct singleNodeType
+{
 	int data;
-	struct t_singleNode* next;
-} t_singleNode;
+	struct singleNodeType* next;
+} singleNode;
 
-typedef struct s_doubleNode {
+typedef struct doubleNodeType
+{
 	int data;
-	struct node* prev;
-	struct t_doubleNode* next;
-} t_doubleNode;
+	struct doubleNodeType* prev;
+	struct doubleNodeType* next;
+} doubleNode;
 
 #endif
