@@ -151,7 +151,13 @@ void clearArrayList(ArrayList* pList)
     pList->currentElementCount = 0;
 }
 
+/*
+배열 리스트의 길이: 최대 원소 개수
+*/
 int getArrayListLength(ArrayList* pList)
 {
+    int result;
 
+    result = pList->maxElementCount;
+    return (result);
 }
