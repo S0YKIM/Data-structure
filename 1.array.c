@@ -58,7 +58,15 @@ int isArrayListFull(ArrayList* pList)
 */
 int addALElement(ArrayList* pList, int position, ArrayListNode element)
 {
-    if ((position <= pList->currentElementCount) && !(isArrayListFull(pList)))
+    if (isArrayListFull(pList) || position > pList->currentElementCount)
+        return (FALSE);
+    if (currentElementCount == 0)
+    {
+        pList->pElement[0].data = element.data;
+        pList->currentElementCount++;
+        return (TRUE);
+    }
+    else
     {
         for (int i = pList->currentElementCount; i > position; i--)
         {
@@ -68,7 +76,6 @@ int addALElement(ArrayList* pList, int position, ArrayListNode element)
         pList->currentElementCount++;
         return (TRUE);
     }
-    return (FALSE);
 }
 
 /*
@@ -92,9 +99,20 @@ int removeALElement(ArrayList* pList, int position)
     return (FALSE);
 }
 
+/*
+특정 인덱스(position)에 해당하는 원소의 주소 구하기
+*/
+
 ArrayListNode* getALElement(ArrayList* pList, int position)
 {
+    ArrayListNode*  address;
+
     if (position < pList->currentElementCount)
+    {
+        address = ArrayListNode + position * sizeof(ArrayListNode);
+        return (address);
+    }
+    return (NULL);
 }
 
 /*
