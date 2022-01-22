@@ -1,10 +1,13 @@
 #ifndef _LINKEDLIST_
 #define _LINKEDLIST_
 
+/*
+단방향 연결 리스트
+*/
 typedef struct ListNodeType
 {
 	int data;
-	struct ListNodeType* pLink;
+	struct ListNodeType* pLink; // 다음 노드의 주소
 } ListNode;
 
 typedef struct LinkedListType
