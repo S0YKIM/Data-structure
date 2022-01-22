@@ -40,7 +40,9 @@ typedef struct doubleNodeType
 } doubleNode;
 
 
-
+/*
+연결리스트 생성
+*/
 LinkedList* createLinkedList()
 {
     LinkedList* address;
@@ -49,13 +51,37 @@ LinkedList* createLinkedList()
     if (!address)
         return (NULL);
     address->currentElementCount = 0;
-    address->headerNode = 0;
+    address->headerNode.data = 0;
+    address->headerNode.pLink = 0;
     return (address);
 }
 
+/*
+연결 리스트의 요소 추가
+*/
 int addLLElement(LinkedList* pList, int position, ListNode element)
 {
+    // 처음으로 요소 추가
+    if (position == 0 && pList->currentElementCount == 0)
+    {
+        element.pLink = 0;
+        pList->headerNode = element;
+        pList->currentElementCount++;
+        return (TRUE);
+    }
 
+    // 마지막 부분에 요소 추가
+    if (position == pList->currentElementCount)
+    {
+        element.pLink = 0;
+        // 마지막 요소 찾는 함수 만들기! libft 참고
+    }
+    if (position < pList->currentElementCount)
+    {
+        element->pLink = pList->headerNode
+        pList->headerNode = ;
+        pList->currentElementCount++;
+    }
 }
 
 int removeLLElement(LinkedList* pList, int position)
