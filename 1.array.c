@@ -1,16 +1,3 @@
-typedef struct ArrayListNodeType
-{
-  int data;
-} ArrayListNode;
-
-typedef struct ArrayListType
-{
-  int maxElementCount;		// 최대 원소 개수 (예: 10개)
-  int currentElementCount;	// 현재 원소 개수 (예: add -> +1   remove -> -1)
-  ArrayListNode *pElement;	// 원소 저장을 위한 배열 포인터 (예: malloc(sizeof(ArrayListNode) * 10))
-} ArrayList;
-
-
 #include "data_structure.h"
 
 /*
