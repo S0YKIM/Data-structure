@@ -38,7 +38,9 @@ ArrayList 메모리 해제
 void deleteArrayList(ArrayList* pList)
 {
     free(pList->pElement);
+    pList->pElement = 0;
     free(pList);
+    pList = 0;
 }
 
 /*
