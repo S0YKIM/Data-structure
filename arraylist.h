@@ -13,14 +13,14 @@ typedef struct ArrayListType
 	ArrayListNode *pElement;	// 원소 저장을 위한 1차원 배열 10 malloc(sizeof(ArrayListNode) * 10)
 } ArrayList;
 
-ArrayList* createArrayList(int maxElementCount); // ArrayList malloc해주는 애
-void deleteArrayList(ArrayList* pList); // pElement, ArrayList free 해주는 애
+ArrayList* createArrayList(int maxElementCount); // ArrayList 에 malloc
+void deleteArrayList(ArrayList* pList); // pElement, ArrayList 를 free
 int isArrayListFull(ArrayList* pList); // maxElementCount == currentElementCount
 int addALElement(ArrayList* pList, int position, ArrayListNode element); // data 넣어주기 isArrayListFull 사용해서 남아있으면 ADD하고 자료 뒤로 밀기
 int removeALElement(ArrayList* pList, int position); // 지우고, 앞으로 밀기
-ArrayListNode* getALElement(ArrayList* pList, int position); // 특정 포지션의 ListNode return -> pList + (position * sizeof(ArrayListNode))
-void displayArrayList(ArrayList* pList); // array에 있는 것 다 출력
-void clearArrayList(ArrayList* pList); // delete 와 clear의 차이점 => current->0 data->0 잠깐 보류
+ArrayListNode* getALElement(ArrayList* pList, int position); // 특정 포지션의 ListNode return -> ArrayListNode + (position * sizeof(ArrayListNode))
+void displayArrayList(ArrayList* pList); // ArrayList 에 있는 모든 요소 출력
+void clearArrayList(ArrayList* pList); // ArrayList 의 데이터를 0으로 초기화하되 free 는 하지 않음
 int getArrayListLength(ArrayList* pList); // pList length -> return currentElementCount
 
 #endif
