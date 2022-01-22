@@ -86,6 +86,8 @@ int addALElement(ArrayList* pList, int position, ArrayListNode element)
 
 int removeALElement(ArrayList* pList, int position)
 {
+    if (pList->currentElementCount == 0)
+        return (FALSE);
     if (position < pList->currentElementCount)
     {
         for (int i = position; i < pList->currentElementCount - 1; i++)
@@ -120,7 +122,18 @@ pList 원소 출력
 */
 void displayArrayList(ArrayList* pList)
 {
-
+    if (pList->currentElementCount == 0)
+    {
+        printf("Max element count: %i\n", pList->maxElementCount);
+        printf("No data added yet.\n");
+        return ;
+    }
+    printf("Max element count: %i\n", pList->maxElementCount);
+    printf("Current element count: %i\n", pList->currentElementCount);
+    for (i = 0; i < pList->currentElementCount; i++)
+    {
+        printf("Element[%i]: %i", i, pList->pElement[i]);
+    }
 }
 
 /*
