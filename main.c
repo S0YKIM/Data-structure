@@ -1,10 +1,16 @@
 #include "data_structure.h"
 
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	// int number;
+	int	number;
 
+	if (argc != 2)
+	{
+		printf("Two arguments needed.");
+		return (0);
+	}
+	number = argv[1][0] - '0';
 	// if
 	// number = argv[1] - '0'
 	// switch
