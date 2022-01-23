@@ -1,17 +1,3 @@
-/*
-
-linked list 구현하기
-
-1. node 생성
-2. node 맨 앞 연결
-3. node 중간 연결
-4. node 맨 뒤 연결
-5. node 처음 삭제
-6. node 중간 삭제
-7. node 마지막 삭제
-
-*/
-
 #include "data_structure.h"
 
 /*
@@ -31,12 +17,13 @@ LinkedList* createLinkedList()
 }
 
 /*
-연결 리스트의 요소 추가
+연결 리스트의 요소 [i]번째에 추가
 */
 int addLLElement(LinkedList* pList, int position, ListNode element)
 {	
 	ListNode	*new_node;
-	ListNode	*ptr;
+	ListNode	*from;
+	ListNode	*to;
 	ListNode	*tmp;
 
 	if (position < 0)
@@ -46,14 +33,14 @@ int addLLElement(LinkedList* pList, int position, ListNode element)
 	if (!(new_node))
 		return (FALSE);
 	new_node->data = element.data;
-	ptr = pList->headerNode.pLink;
+	from = pList->headerNode.pLink;
 
 	if (position <= pList->currentElementCount)
 	{
 		// 맨 앞 삽입
 		if (position == 0)
 		{
-			*(new_node->pLink) = pList->headerNode;
+			new_node->pLink = &(pList->headerNode);
 			pList->headerNode = *new_node;
 		}
 		// 맨 뒤 삽입
@@ -61,9 +48,9 @@ int addLLElement(LinkedList* pList, int position, ListNode element)
 		{
 			while (position--)
 			{
-				ptr = ptr->pLink;
+				from = from->pLink;
 			}
-			ptr = new_node;
+			from = new_node;
 			new_node->pLink = NULL;
 		}
 		// 중간 삽입
@@ -71,11 +58,14 @@ int addLLElement(LinkedList* pList, int position, ListNode element)
 		{
 			while (--position)
 			{
-				ptr = ptr->pLink;
-				tmp = ptr;
+				from = from->pLink;
 			}
-			ptr = new_node;
-			new_node->pLink = tmp;
+			tmp = from;
+			to = from->pLink;
+			new_node->pLink = to;
+			from = new_node;
+			free(tmp);
+			tmp = NULL;
 		}
 		pList->currentElementCount++;
 		return (TRUE);
@@ -83,9 +73,54 @@ int addLLElement(LinkedList* pList, int position, ListNode element)
 	return (FALSE);
 }
 
+/*
+연결리스트의 [i]번째 요소 제거
+*/
 int removeLLElement(LinkedList* pList, int position)
 {
+	ListNode	*from;
+	ListNode	*to;
+	ListNode	*tmp;
 
+	if (position < 0)
+		return (FALSE);
+	from = pList->headerNode.pLink;
+	if (position < pList->currentElementCount)
+	{
+		// 첫 번째 노드 제거
+		if (position == 0)
+		{
+			tmp = &(pList->headerNode);
+			pList->headerNode = *from;
+			free(tmp);
+			tmp = NULL;
+		}
+		// 마지막 노드 제거
+		else if (position == pList->currentElementCount - 1)
+		{
+			while (--position)
+			{
+				from = from->pLink;
+			}
+			free(from);
+			from = NULL;
+		}
+		// 중간 노드 제거
+		else
+		{
+			while (--position)
+			{
+				from = from->pLink;
+			}
+			to = from->pLink;
+			tmp = from;
+			from = to;
+			free(tmp);
+			tmp = NULL;
+		}
+		return (TRUE);
+	}
+	return (FALSE);
 }
 
 /*
