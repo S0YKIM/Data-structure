@@ -1,3 +1,8 @@
+NAME = data_structure
+
+CC = gcc
+CFLAGS = -Wall -Werror -Wextra
+
 SRCS = main.c \
 	   1.array.c \
 	   1.linked_list.c \
@@ -28,16 +33,17 @@ SRCS = main.c \
 
 OBJS = $(SRCS:.c=.o)
 
-NAME = data_structure
+INC_FLAGS = -I ./data_structure
 
 RM = rm -f
 
-CC = gcc -Wall -Werror -Wextra -g
-
 all : $(NAME)
 
+.c.o:
+	$(CC) $(CFLAGS) -c $< -o $@ $(INC_FLAGS)
+
 $(NAME) : $(OBJS)
-	$(CC) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^
 
 clean:
 	$(RM) $(OBJS)
