@@ -14,74 +14,73 @@ linked list 구현하기
 
 #include "data_structure.h"
 
-typedef struct ListNodeType
-{
-	int data;
-	struct ListNodeType* pLink; // 다음 노드의 주소
-} ListNode;
-
-typedef struct LinkedListType
-{
-	int currentElementCount;	// 현재 저장된 원소의 개수
-	ListNode headerNode;		// 헤더 노드(Header Node)
-} LinkedList;
-
-typedef struct singleNodeType
-{
-	int data;
-	struct singleNodeType* next;
-} singleNode;
-
-typedef struct doubleNodeType
-{
-	int data;
-	struct doubleNodeType* prev;
-	struct doubleNodeType* next;
-} doubleNode;
-
-
 /*
 연결리스트 생성
 */
 LinkedList* createLinkedList()
 {
-    LinkedList* address;
+    LinkedList* lst;
 
-    address = (LinkedList*)malloc(sizeof(LinkedList));
-    if (!address)
+    lst = (LinkedList*)malloc(sizeof(LinkedList));
+    if (!lst)
         return (NULL);
-    address->currentElementCount = 0;
-    address->headerNode.data = 0;
-    address->headerNode.pLink = 0;
-    return (address);
+    lst->currentElementCount = 0;
+    lst->headerNode.data = 0;
+    lst->headerNode.pLink = 0;
+    return (lst);
 }
 
 /*
 연결 리스트의 요소 추가
 */
 int addLLElement(LinkedList* pList, int position, ListNode element)
-{
-    // 처음으로 요소 추가
-    if (position == 0 && pList->currentElementCount == 0)
-    {
-        element.pLink = 0;
-        pList->headerNode = element;
-        pList->currentElementCount++;
-        return (TRUE);
-    }
+{	
+	ListNode	*new_node;
+	ListNode	*ptr;
+	ListNode	*tmp;
 
-    // 마지막 부분에 요소 추가
-    if (position == pList->currentElementCount)
-    {
-        element.pLink = 0;
-        // 마지막 요소 찾는 함수 만들기! libft 참고
-    }
-    if (position < pList->currentElementCount)
-    {
-        element->pLink = pList->headerNode
-        pList->headerNode = ;
-        pList->currentElementCount++;
-    }
+	if (position < 0)
+		return (FALSE);
+
+	new_node = (ListNode *)malloc(sizeof(ListNode));
+	if (!(new_node))
+		return (FALSE);
+	new_node->data = element.data;
+	ptr = pList->headerNode.pLink;
+
+	if (position <= pList->currentElementCount)
+	{
+		// 맨 앞 삽입
+		if (position == 0)
+		{
+			*(new_node->pLink) = pList->headerNode;
+			pList->headerNode = *new_node;
+		}
+		// 맨 뒤 삽입
+		else if (position == pList->currentElementCount)
+		{
+			while (position--)
+			{
+				ptr = ptr->pLink;
+			}
+			ptr = new_node;
+			new_node->pLink = 0;
+		}
+		// 중간 삽입
+		else
+		{
+			while (--position)
+			{
+				ptr = ptr->pLink;
+				tmp = ptr;
+			}
+			ptr = new_node;
+			new_node->pLink = tmp;
+		}
+		pList->currentElementCount++;
+		return (TRUE);
+	}
+	return (FALSE);
 }
 
 int removeLLElement(LinkedList* pList, int position)
