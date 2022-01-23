@@ -93,9 +93,20 @@ ListNode* getLLElement(LinkedList* pList, int position)
 
 }
 
+/*
+연결리슽트의 모든 데이터 0 으로 초기화
+*/
 void clearLinkedList(LinkedList* pList)
 {
+	ListNode	*ptr;
 
+	ptr = pList->headerNode.pLink;
+	pList->headerNode.data = 0;
+	while (ptr)
+	{
+		ptr.data = 0;
+		ptr = ptr->pLink;
+	}
 }
 
 /*
