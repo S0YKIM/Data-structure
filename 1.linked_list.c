@@ -64,7 +64,7 @@ int addLLElement(LinkedList* pList, int position, ListNode element)
 				ptr = ptr->pLink;
 			}
 			ptr = new_node;
-			new_node->pLink = 0;
+			new_node->pLink = NULL;
 		}
 		// 중간 삽입
 		else
@@ -94,7 +94,7 @@ ListNode* getLLElement(LinkedList* pList, int position)
 }
 
 /*
-연결리슽트의 모든 데이터 0 으로 초기화
+연결리스트의 모든 데이터 0 으로 초기화
 */
 void clearLinkedList(LinkedList* pList)
 {
@@ -104,7 +104,7 @@ void clearLinkedList(LinkedList* pList)
 	pList->headerNode.data = 0;
 	while (ptr)
 	{
-		ptr.data = 0;
+		ptr->data = 0;
 		ptr = ptr->pLink;
 	}
 }
@@ -120,7 +120,21 @@ int getLinkedListLength(LinkedList* pList)
 	return (len);
 }
 
+/*
+연결리스트의 모든 요소 free
+*/
 void deleteLinkedList(LinkedList* pList)
 {
-
+	ListNode	*ptr;
+	ListNode	*tmp;
+	
+	ptr = pList->headerNode.pLink;
+	while (ptr)
+	{
+		tmp = ptr->pLink;
+		free(ptr);
+		ptr = temp;
+	}
+	free(pList);
+	pList = NULL;
 }
