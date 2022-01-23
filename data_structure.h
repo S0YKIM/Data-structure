@@ -3,7 +3,7 @@
 
 # include <stdio.h>
 # include <stdlib.h>
-# include "arrayList.h"
+# include "arraylist.h"
 # include "linkedlist.h"
 
 typedef struct singleNodeType
