@@ -25,9 +25,9 @@ ArrayList 메모리 해제
 void deleteArrayList(ArrayList* pList)
 {
     free(pList->pElement);
-    pList->pElement = 0;
+    pList->pElement = NULL;
     free(pList);
-    pList = 0;
+    pList = NULL;
 }
 
 /*
@@ -48,20 +48,24 @@ int isArrayListFull(ArrayList* pList)
 
 int addALElement(ArrayList* pList, int position, ArrayListNode element)
 {
+	int	i;
+
 	if (position < 0)
 		return (FALSE);
 	if (position < pList->maxElementCount && !isArrayListFull(pList))
 	{
-		for (int i = pList->currentElementCount; i > position; i--)
+		i = pList->currentElementCount;
+		while (i > position)
 		{
 			pList->pElement[i].data = pList->pElement[i - 1].data;
+			i--;
 		}
-		pList->pElement[position].data = element.data;
+		pList->pElement[i].data = element.data;
 		pList->currentElementCount++;
-		return TRUE;
+		return (TRUE);
 	}
 	else
-		return FALSE;
+		return (FALSE);
 }
 
 /*
@@ -72,15 +76,19 @@ int addALElement(ArrayList* pList, int position, ArrayListNode element)
 
 int removeALElement(ArrayList* pList, int position)
 {
-    if (pList->currentElementCount == 0)
+	int	i;
+
+    if (pList->currentElementCount == 0 || position < 0)
         return (FALSE);
     if (position < pList->currentElementCount)
     {
-        for (int i = position; i < pList->currentElementCount - 1; i++)
-        {
-            pList->pElement[i].data = pList->pElement[i+1].data;
-        }
-        pList->pElement[pList->currentElementCount - 1].data = 0;
+		i = position;
+		while (i < pList->currentElementCount - 1)
+		{		
+            pList->pElement[i].data = pList->pElement[i + 1].data;
+			i++;
+		}
+		pList->pElement[i].data = 0;
         pList->currentElementCount--;
         return (TRUE);
     }
@@ -93,12 +101,14 @@ int removeALElement(ArrayList* pList, int position)
 
 ArrayListNode* getALElement(ArrayList* pList, int position)
 {
-    ArrayListNode*  address;
+    ArrayListNode*  node;
 
+	if (position < 0)
+		return (NULL);
     if (position < pList->currentElementCount)
     {
-        address = ArrayListNode + position * sizeof(ArrayListNode);
-        return (address);
+        node = pList->pElement + position * sizeof(ArrayListNode);
+        return (node);
     }
     return (NULL);
 }
@@ -116,9 +126,9 @@ void displayArrayList(ArrayList* pList)
     }
     printf("Max element count: %i\n", pList->maxElementCount);
     printf("Current element count: %i\n", pList->currentElementCount);
-    for (i = 0; i < pList->currentElementCount; i++)
+    for (int i = 0; i < pList->currentElementCount; i++)
     {
-        printf("Element[%i]: %i\n", i, pList->pElement[i]);
+        printf("Element[%i]: %i\n", i, pList->pElement[i].data);
     }
 }
 
@@ -129,7 +139,7 @@ void clearArrayList(ArrayList* pList)
 {
     for (int i = 0; i < pList->currentElementCount; i++)
     {
-        pList->pElement[i] = 0;
+        pList->pElement[i].data = 0;
     }
     pList->currentElementCount = 0;
 }
