@@ -98,9 +98,15 @@ void clearLinkedList(LinkedList* pList)
 
 }
 
+/*
+연결리스트의 요소 개수 반환
+*/
 int getLinkedListLength(LinkedList* pList)
 {
+	int	len;
 
+	len = pList->currentElementCount;
+	return (len);
 }
 
 void deleteLinkedList(LinkedList* pList)
