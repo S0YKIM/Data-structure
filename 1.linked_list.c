@@ -88,9 +88,19 @@ int removeLLElement(LinkedList* pList, int position)
 
 }
 
+/*
+연결리스트의 [i]번째 요소 반환
+*/
 ListNode* getLLElement(LinkedList* pList, int position)
 {
+	ListNode	*ptr;
 
+	ptr = pList->headerNode.pLink;
+	while (--position)
+	{
+		ptr = ptr->pLink;
+	}
+	return (ptr);
 }
 
 /*
@@ -133,7 +143,7 @@ void deleteLinkedList(LinkedList* pList)
 	{
 		tmp = ptr->pLink;
 		free(ptr);
-		ptr = temp;
+		ptr = tmp;
 	}
 	free(pList);
 	pList = NULL;
