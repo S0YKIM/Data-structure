@@ -54,12 +54,12 @@ int addLLElement(LinkedList* pList, int position, ListNode element)
 		// 중간 삽입
 		else
 		{
-			while (position--)
+			while (--position)
 			{
 				ptr = ptr->pLink;
 			}
-			new_node->pLink = ptr;
-			ptr = new_node;
+			new_node->pLink = ptr->pLink;
+			ptr->pLink = new_node;
 		}
 		pList->currentElementCount++;
 		return (TRUE);
@@ -85,7 +85,7 @@ int removeLLElement(LinkedList* pList, int position)
 		if (position == 0)
 		{
 			pList->headerNode.pLink = ptr->pLink;
-			free(ptr->pLink);
+			ptr->pLink = NULL;
 			free(ptr);
 			ptr = NULL;
 		}
