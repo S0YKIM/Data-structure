@@ -22,9 +22,7 @@ LinkedList* createLinkedList()
 int addLLElement(LinkedList* pList, int position, ListNode element)
 {	
 	ListNode	*new_node;
-	ListNode	*from;
-	ListNode	*to;
-	ListNode	*tmp;
+	ListNode	*ptr;
 
 	if (position < 0)
 		return (FALSE);
@@ -33,39 +31,35 @@ int addLLElement(LinkedList* pList, int position, ListNode element)
 	if (!(new_node))
 		return (FALSE);
 	new_node->data = element.data;
-	from = pList->headerNode.pLink;
+	ptr = pList->headerNode.pLink;
 
 	if (position <= pList->currentElementCount)
 	{
 		// 맨 앞 삽입
 		if (position == 0)
 		{
-			new_node->pLink = &(pList->headerNode);
-			pList->headerNode = *new_node;
+			new_node->pLink = pList->headerNode.pLink;
+			pList->headerNode.pLink = new_node;
 		}
 		// 맨 뒤 삽입
 		else if (position == pList->currentElementCount)
 		{
 			while (position--)
 			{
-				from = from->pLink;
+				ptr = ptr->pLink;
 			}
-			from = new_node;
+			ptr = new_node;
 			new_node->pLink = NULL;
 		}
 		// 중간 삽입
 		else
 		{
-			while (--position)
+			while (position--)
 			{
-				from = from->pLink;
+				ptr = ptr->pLink;
 			}
-			tmp = from;
-			to = from->pLink;
-			new_node->pLink = to;
-			from = new_node;
-			free(tmp);
-			tmp = NULL;
+			new_node->pLink = ptr;
+			ptr = new_node;
 		}
 		pList->currentElementCount++;
 		return (TRUE);
@@ -78,43 +72,45 @@ int addLLElement(LinkedList* pList, int position, ListNode element)
 */
 int removeLLElement(LinkedList* pList, int position)
 {
-	ListNode	*from;
-	ListNode	*to;
+	ListNode	*ptr;
+	ListNode	*next;
 	ListNode	*tmp;
 
 	if (position < 0)
 		return (FALSE);
-	from = pList->headerNode.pLink;
+	ptr = pList->headerNode.pLink;
 	if (position < pList->currentElementCount)
 	{
 		// 첫 번째 노드 제거
 		if (position == 0)
 		{
-			tmp = &(pList->headerNode);
-			pList->headerNode = *from;
-			free(tmp);
-			tmp = NULL;
+			pList->headerNode.pLink = ptr->pLink;
+			free(ptr->pLink);
+			free(ptr);
+			ptr = NULL;
 		}
 		// 마지막 노드 제거
 		else if (position == pList->currentElementCount - 1)
 		{
-			while (--position)
+			while (position--)
 			{
-				from = from->pLink;
+				ptr = ptr->pLink;
 			}
-			free(from);
-			from = NULL;
+			ptr->pLink = NULL;
+			free(ptr);
+			ptr = NULL;
 		}
 		// 중간 노드 제거
 		else
 		{
-			while (--position)
+			while (position--)
 			{
-				from = from->pLink;
+				ptr = ptr->pLink;
 			}
-			to = from->pLink;
-			tmp = from;
-			from = to;
+			next = ptr->pLink;
+			tmp = ptr;
+			ptr = next;
+			tmp->pLink = NULL;
 			free(tmp);
 			tmp = NULL;
 		}
@@ -131,7 +127,7 @@ ListNode* getLLElement(LinkedList* pList, int position)
 	ListNode	*ptr;
 
 	ptr = pList->headerNode.pLink;
-	while (--position)
+	while (position--)
 	{
 		ptr = ptr->pLink;
 	}
@@ -146,7 +142,6 @@ void clearLinkedList(LinkedList* pList)
 	ListNode	*ptr;
 
 	ptr = pList->headerNode.pLink;
-	pList->headerNode.data = 0;
 	while (ptr)
 	{
 		ptr->data = 0;
@@ -177,6 +172,7 @@ void deleteLinkedList(LinkedList* pList)
 	while (ptr)
 	{
 		tmp = ptr->pLink;
+		ptr->pLink = NULL;
 		free(ptr);
 		ptr = tmp;
 	}

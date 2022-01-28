@@ -33,7 +33,7 @@ SRCS = main.c \
 
 OBJS = $(SRCS:.c=.o)
 
-INC_FLAGS = -I ./data_structure
+INC_FLAGS = -I includes
 
 RM = rm -f
 
