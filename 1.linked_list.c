@@ -73,7 +73,6 @@ int addLLElement(LinkedList* pList, int position, ListNode element)
 int removeLLElement(LinkedList* pList, int position)
 {
 	ListNode	*ptr;
-	ListNode	*next;
 	ListNode	*tmp;
 
 	if (position < 0)
@@ -103,13 +102,12 @@ int removeLLElement(LinkedList* pList, int position)
 		// 중간 노드 제거
 		else
 		{
-			while (position--)
+			while (--position)
 			{
 				ptr = ptr->pLink;
 			}
-			next = ptr->pLink;
-			tmp = ptr;
-			ptr = next;
+			tmp = ptr->pLink;
+			ptr->pLink = tmp->pLink;
 			tmp->pLink = NULL;
 			free(tmp);
 			tmp = NULL;
@@ -163,12 +161,12 @@ int getLinkedListLength(LinkedList* pList)
 /*
 연결리스트의 모든 요소 free
 */
-void deleteLinkedList(LinkedList* pList)
+void deleteLinkedList(LinkedList** pList)
 {
 	ListNode	*ptr;
 	ListNode	*tmp;
 	
-	ptr = pList->headerNode.pLink;
+	ptr = (*pList)->headerNode.pLink;
 	while (ptr)
 	{
 		tmp = ptr->pLink;
@@ -176,6 +174,24 @@ void deleteLinkedList(LinkedList* pList)
 		free(ptr);
 		ptr = tmp;
 	}
-	free(pList);
-	pList = NULL;
+	free(*pList);
+	*pList = NULL;
+}
+
+/*
+(Custom) 연결리스트의 모든 데이터 출력
+*/
+void displayLinkedList(LinkedList *list)
+{
+	ListNode	*ptr;
+
+	if (!list)
+		return ;
+	ptr = list->headerNode.pLink;
+	while (ptr)
+	{
+		printf("%i ", ptr->data);
+		ptr = ptr->pLink;
+	}
+	printf("\n");
 }

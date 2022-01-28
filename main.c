@@ -1,10 +1,10 @@
 #include "data_structure.h"
 
-
 int	main(int argc, char **argv)
 {
-	int	number;
-	
+	int			number;
+	LinkedList	*list;
+	ListNode	node;
 
 	if (argc != 2)
 	{
@@ -15,13 +15,28 @@ int	main(int argc, char **argv)
 	switch (number)
 	{
 		// 1. array
-		1 :
-
-		cre
 		// 1.linked_list
-		2 :
+		case 1 :
+		list = createLinkedList();
+		if (!list)
+			return (0);
+		
+		// Adding nodes from 100 to 900
+		for (int i = 100; i < 1000; i += 100)
+		{
+			node.data = i;
+			addLLElement(list, 0, node);
+		}
+		displayLinkedList(list);
 
+		// Removing the second node
+		removeLLElement(list, 1);
+		displayLinkedList(list);
 
+		// Deleting the whole linked list
+		deleteLinkedList(&list);
+		displayLinkedList(list);
+		return (0);
 	}
 	// 2.circular_linked_list
 
