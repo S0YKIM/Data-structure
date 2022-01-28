@@ -24,7 +24,12 @@ ListNode* getLLElement(LinkedList* pList, int position);
 void clearLinkedList(LinkedList* pList);
 int getLinkedListLength(LinkedList* pList);
 void deleteLinkedList(LinkedList** pList);
+
+/*
+커스텀 함수
+*/
 void displayLinkedList(LinkedList *list);
+int	iterateLinkedList(LinkedList *list);
 #endif
 
 #ifndef _COMMON_LIST_DEF_

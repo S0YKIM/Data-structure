@@ -195,3 +195,23 @@ void displayLinkedList(LinkedList *list)
 	}
 	printf("\n");
 }
+
+/*
+(Custom) 연결리스트의 노드 개수 반환
+*/
+int	iterateLinkedList(LinkedList *list)
+{
+	ListNode	*ptr;
+	int			cnt;
+
+	if (!list)
+		return (-1);
+	cnt = 0;
+	ptr = list->headerNode.pLink;
+	while (ptr)
+	{
+		cnt++;
+		ptr = ptr->pLink;
+	}
+	return (cnt);
+}
