@@ -1,10 +1,96 @@
 #include "data_structure.h"
 
-int	main(int argc, char **argv)
+void	array_linked_list()
 {
-	int			number;
 	LinkedList	*list;
 	ListNode	node;
+
+	list = createLinkedList();
+	if (!list)
+		return ;
+	
+	// Adding nodes from 100 to 900
+	for (int i = 100; i < 200; i += 100)
+	{
+		node.data = i;
+		addLLElement(list, 0, node);
+	}
+	displayLinkedList(list);
+
+	// Reversing the whole linked list
+	reverseLinkedList(list);
+	displayLinkedList(list);
+	// Removing the second node
+	//removeLLElement(list, 1);
+	//displayLinkedList(list);
+
+	// Deleting the whole linked list
+	//deleteLinkedList(&list);
+	//displayLinkedList(list);
+}
+
+void	polynomial()
+{
+	LinkedList	*list1;
+	LinkedList	*list2;
+	ListNode	node;
+	LinkedList	*new_list;
+
+	// A 다항식 연결 리스트: 3x^6 + x^4 + 4x^2
+	list1 = createLinkedList();
+	if (!list1)
+		return ;
+	
+	// x^4
+	node.degree = 4;
+	node.coef = 1;
+	addPolyElement(list1, node);
+
+	// 3x^6
+	node.degree = 6;
+	node.coef = 3;
+	addPolyElement(list1, node);
+
+	// 4x^2
+	node.degree = 2;
+	node.coef = 4;
+	addPolyElement(list1, node);
+	displayPolyList(list1);
+
+	// B 다항식 연결 리스트: x^5 + 2x^4 + 3x^2 + 4
+	list2 = createLinkedList();
+	if (!list2)
+		return ;
+	
+	// x^5
+	node.degree = 5;
+	node.coef = 1;
+	addPolyElement(list2, node);
+
+	// 2x^4
+	node.degree = 4;
+	node.coef = 2;
+	addPolyElement(list2, node);
+
+	// 3x^2
+	node.degree = 2;
+	node.coef = 3;
+	addPolyElement(list2, node);
+
+	// 4
+	node.degree = 0;
+	node.coef = 4;
+	addPolyElement(list2, node);
+	displayPolyList(list2);
+
+	// A + B
+	new_list = addPolyLists(list1, list2);
+	displayPolyList(new_list);
+}
+
+int	main(int argc, char **argv)
+{
+	int	number;
 
 	if (argc != 2)
 	{
@@ -12,34 +98,19 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	number = argv[1][0] - '0';
+
 	switch (number)
 	{
 		// 1. array
 		// 1.linked_list
 		case 1 :
-		list = createLinkedList();
-		if (!list)
-			return (0);
-		
-		// Adding nodes from 100 to 900
-		for (int i = 100; i < 200; i += 100)
-		{
-			node.data = i;
-			addLLElement(list, 0, node);
-		}
-		displayLinkedList(list);
-
-		// Reversing the whole linked list
-		reverseLinkedList(list);
-		displayLinkedList(list);
-		// Removing the second node
-		//removeLLElement(list, 1);
-		//displayLinkedList(list);
-
-		// Deleting the whole linked list
-		//deleteLinkedList(&list);
-		//displayLinkedList(list);
-		return (0);
+			array_linked_list();
+			break ;
+		case 2 :
+			polynomial();
+			break ;
+		default :
+			break ;		
 	}
 	// 2.circular_linked_list
 

@@ -3,7 +3,7 @@
 /*
 연결리스트 생성
 */
-LinkedList* createLinkedList()
+LinkedList	*createLinkedList()
 {
     LinkedList* lst;
 
@@ -19,7 +19,7 @@ LinkedList* createLinkedList()
 /*
 연결 리스트의 요소 [i]번째에 추가
 */
-int addLLElement(LinkedList* pList, int position, ListNode element)
+int	addLLElement(LinkedList* pList, int position, ListNode element)
 {	
 	ListNode	*new_node;
 	ListNode	*ptr;
@@ -30,7 +30,7 @@ int addLLElement(LinkedList* pList, int position, ListNode element)
 	new_node = (ListNode *)malloc(sizeof(ListNode));
 	if (!(new_node))
 		return (FALSE);
-	new_node->data = element.data;
+	*new_node = element;
 	ptr = pList->headerNode.pLink;
 
 	if (position <= pList->currentElementCount)
@@ -40,16 +40,6 @@ int addLLElement(LinkedList* pList, int position, ListNode element)
 		{
 			new_node->pLink = pList->headerNode.pLink;
 			pList->headerNode.pLink = new_node;
-		}
-		// 맨 뒤 삽입
-		else if (position == pList->currentElementCount)
-		{
-			while (position--)
-			{
-				ptr = ptr->pLink;
-			}
-			ptr = new_node;
-			new_node->pLink = NULL;
 		}
 		// 중간 삽입
 		else
@@ -70,7 +60,7 @@ int addLLElement(LinkedList* pList, int position, ListNode element)
 /*
 연결리스트의 [i]번째 요소 제거
 */
-int removeLLElement(LinkedList* pList, int position)
+int	removeLLElement(LinkedList* pList, int position)
 {
 	ListNode	*ptr;
 	ListNode	*tmp;
@@ -120,7 +110,7 @@ int removeLLElement(LinkedList* pList, int position)
 /*
 연결리스트의 [i]번째 요소 반환
 */
-ListNode* getLLElement(LinkedList* pList, int position)
+ListNode	*getLLElement(LinkedList* pList, int position)
 {
 	ListNode	*ptr;
 
@@ -135,7 +125,7 @@ ListNode* getLLElement(LinkedList* pList, int position)
 /*
 연결리스트의 모든 데이터 0 으로 초기화
 */
-void clearLinkedList(LinkedList* pList)
+void	clearLinkedList(LinkedList* pList)
 {
 	ListNode	*ptr;
 
@@ -150,7 +140,7 @@ void clearLinkedList(LinkedList* pList)
 /*
 연결리스트의 요소 개수 반환
 */
-int getLinkedListLength(LinkedList* pList)
+int	getLinkedListLength(LinkedList* pList)
 {
 	int	len;
 
@@ -181,7 +171,7 @@ void deleteLinkedList(LinkedList** pList)
 /*
 (Bonus) 연결리스트의 모든 데이터 출력
 */
-void displayLinkedList(LinkedList *list)
+void	displayLinkedList(LinkedList *list)
 {
 	ListNode	*ptr;
 
@@ -223,7 +213,7 @@ int	iterateLinkedList(LinkedList *list)
 /*
 (Bonus) 연결 리스트 역순 만들기
 */
-void reverseLinkedList(LinkedList* pList)
+void	reverseLinkedList(LinkedList* pList)
 {
 	ListNode	*prev;
 	ListNode	*current;
@@ -242,4 +232,101 @@ void reverseLinkedList(LinkedList* pList)
 		current = next;
 	}
 	pList->headerNode.pLink = prev;
+}
+
+/*
+(Bonus) 다항식 연결 리스트 만들기
+*/
+int	addPolyElement(LinkedList* pList, ListNode element)
+{
+	ListNode	*ptr;
+	int			position;
+
+	if (!pList)
+		return (FALSE);
+	ptr = pList->headerNode.pLink;
+	position = 0;
+	while (ptr)
+	{
+		if (element.degree > ptr->degree)
+			break ;
+		position++;
+		ptr = ptr->pLink;
+	}
+	return (addLLElement(pList, position, element));
+}
+
+/*
+(Bonus) 다항식 연결 리스트 출력
+*/
+void	displayPolyList(LinkedList *list)
+{
+	ListNode	*ptr;
+
+	if (!list)
+		return ;
+	ptr = list->headerNode.pLink;
+	while (ptr)
+	{
+		printf("%.1f", ptr->coef);
+		if (ptr->degree)
+			printf("x^%i", ptr->degree);
+		ptr = ptr->pLink;
+		if (ptr)
+			printf(" + ");
+	}
+	printf("\n");
+}
+
+/*
+(Bonus) 두 개의 다항식 연결 리스트 더하기
+*/
+LinkedList	*addPolyLists(LinkedList *list1, LinkedList *list2)
+{
+	LinkedList	*new_list;
+	ListNode	element;
+	ListNode	*ptr1;
+	ListNode	*ptr2;
+
+	if (!list1 || !list2)
+		return (NULL);
+	new_list = (LinkedList *)malloc(sizeof(LinkedList));
+	if (!new_list)
+		return (NULL);
+	ptr1 = list1->headerNode.pLink;
+	ptr2 = list2->headerNode.pLink;
+	while (ptr1 && ptr2)
+	{
+		if (ptr1->degree > ptr2->degree)
+		{
+			element = *ptr1;
+			ptr1 = ptr1->pLink;
+		}
+		else if (ptr1->degree == ptr2->degree)
+		{
+			element = *ptr1;
+			element.coef += ptr2->coef;
+			ptr1 = ptr1->pLink;
+			ptr2 = ptr2->pLink;
+		}
+		else
+		{
+			element = *ptr2;
+			ptr2 = ptr2->pLink;
+		}
+		addLLElement(new_list, new_list->currentElementCount, element);
+	}
+	while (ptr1)
+	{
+		element = *ptr1;
+		addLLElement(new_list, new_list->currentElementCount, element);
+		ptr1 = ptr1->pLink;
+	}
+	while (ptr2)
+	{
+		element = *ptr2;
+		addLLElement(new_list, new_list->currentElementCount, element);
+		ptr2 = ptr2->pLink;
+	}
+	return (new_list);
 }

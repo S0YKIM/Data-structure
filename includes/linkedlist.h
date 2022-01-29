@@ -6,7 +6,9 @@
 */
 typedef struct ListNodeType
 {
-	int data;
+	int 	data;
+	int		degree;
+	float	coef;
 	struct ListNodeType* pLink; // 다음 노드의 주소
 } ListNode;
 
@@ -16,21 +18,29 @@ typedef struct LinkedListType
 	ListNode headerNode;		// 헤더 노드(Header Node)
 } LinkedList;
 
-LinkedList* createLinkedList();
-int addLLElement(LinkedList* pList, int position, ListNode element);
-int removeLLElement(LinkedList* pList, int position);
-ListNode* getLLElement(LinkedList* pList, int position);
+LinkedList	*createLinkedList();
+int			addLLElement(LinkedList* pList, int position, ListNode element);
+int			removeLLElement(LinkedList* pList, int position);
+ListNode	*getLLElement(LinkedList* pList, int position);
 
-void clearLinkedList(LinkedList* pList);
-int getLinkedListLength(LinkedList* pList);
-void deleteLinkedList(LinkedList** pList);
+void	clearLinkedList(LinkedList* pList);
+int		getLinkedListLength(LinkedList* pList);
+void	deleteLinkedList(LinkedList** pList);
 
 /*
 커스텀 함수
 */
-void displayLinkedList(LinkedList *list);
-int	iterateLinkedList(LinkedList *list);
-void reverseLinkedList(LinkedList* pList);
+void	displayLinkedList(LinkedList *list);
+int		iterateLinkedList(LinkedList *list);
+void	reverseLinkedList(LinkedList* pList);
+
+/*
+다항식의 덧셈 연결리스트
+*/
+int		addPolyElement(LinkedList* pList, ListNode element);
+void	displayPolyList(LinkedList *list);
+LinkedList	*addPolyLists(LinkedList *list1, LinkedList *list2);
+
 #endif
 
 #ifndef _COMMON_LIST_DEF_
