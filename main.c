@@ -22,20 +22,23 @@ int	main(int argc, char **argv)
 			return (0);
 		
 		// Adding nodes from 100 to 900
-		for (int i = 100; i < 1000; i += 100)
+		for (int i = 100; i < 200; i += 100)
 		{
 			node.data = i;
 			addLLElement(list, 0, node);
 		}
 		displayLinkedList(list);
 
-		// Removing the second node
-		removeLLElement(list, 1);
+		// Reversing the whole linked list
+		reverseLinkedList(list);
 		displayLinkedList(list);
+		// Removing the second node
+		//removeLLElement(list, 1);
+		//displayLinkedList(list);
 
 		// Deleting the whole linked list
-		deleteLinkedList(&list);
-		displayLinkedList(list);
+		//deleteLinkedList(&list);
+		//displayLinkedList(list);
 		return (0);
 	}
 	// 2.circular_linked_list

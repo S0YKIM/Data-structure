@@ -179,7 +179,7 @@ void deleteLinkedList(LinkedList** pList)
 }
 
 /*
-(Custom) 연결리스트의 모든 데이터 출력
+(Bonus) 연결리스트의 모든 데이터 출력
 */
 void displayLinkedList(LinkedList *list)
 {
@@ -197,7 +197,7 @@ void displayLinkedList(LinkedList *list)
 }
 
 /*
-(Custom) 연결리스트의 노드 개수 반환
+(Bonus) 연결리스트의 노드 개수 반환
 */
 int	iterateLinkedList(LinkedList *list)
 {
@@ -214,4 +214,32 @@ int	iterateLinkedList(LinkedList *list)
 		ptr = ptr->pLink;
 	}
 	return (cnt);
+}
+
+/*
+(Bonus) 연결 리스트와 연결 리스트 잇기
+*/
+
+/*
+(Bonus) 연결 리스트 역순 만들기
+*/
+void reverseLinkedList(LinkedList* pList)
+{
+	ListNode	*prev;
+	ListNode	*current;
+	ListNode	*next;
+
+	if (!pList)
+		return ;
+	prev = NULL;
+	current = pList->headerNode.pLink;
+
+	for (int i = 0; i < pList->currentElementCount; i++)
+	{
+		next = current->pLink;
+		current->pLink = prev;
+		prev = current;
+		current = next;
+	}
+	pList->headerNode.pLink = prev;
 }

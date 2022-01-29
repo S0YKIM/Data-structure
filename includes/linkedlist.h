@@ -30,6 +30,7 @@ void deleteLinkedList(LinkedList** pList);
 */
 void displayLinkedList(LinkedList *list);
 int	iterateLinkedList(LinkedList *list);
+void reverseLinkedList(LinkedList* pList);
 #endif
 
 #ifndef _COMMON_LIST_DEF_
