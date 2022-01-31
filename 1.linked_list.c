@@ -81,13 +81,12 @@ int	removeLLElement(LinkedList* pList, int position)
 		// 마지막 노드 제거
 		else if (position == pList->currentElementCount - 1)
 		{
-			while (position--)
+			while (--position)
 			{
 				ptr = ptr->pLink;
 			}
+			free(ptr->pLink);
 			ptr->pLink = NULL;
-			free(ptr);
-			ptr = NULL;
 		}
 		// 중간 노드 제거
 		else
@@ -290,11 +289,19 @@ LinkedList	*addPolyLists(LinkedList *list1, LinkedList *list2)
 
 	if (!list1 || !list2)
 		return (NULL);
+
+	// A 와 B 다항식을 더한 결과를 담을 새로운 연결 리스트
 	new_list = (LinkedList *)malloc(sizeof(LinkedList));
 	if (!new_list)
 		return (NULL);
+	
+	// A 다항식 연결리스트 포인터
 	ptr1 = list1->headerNode.pLink;
+
+	// B 다항식 연결리스트 포인터
 	ptr2 = list2->headerNode.pLink;
+	
+	// A 와 B 현재 항의 차수를 비교하여 새로운 연결리스트에 노드 추가해주기
 	while (ptr1 && ptr2)
 	{
 		if (ptr1->degree > ptr2->degree)
@@ -316,6 +323,8 @@ LinkedList	*addPolyLists(LinkedList *list1, LinkedList *list2)
 		}
 		addLLElement(new_list, new_list->currentElementCount, element);
 	}
+
+	// A 와 B 둘 중 하나가 탐색이 끝난 경우 나머지 남은 노드들을 새로운 연결리스트에 붙여주기
 	while (ptr1)
 	{
 		element = *ptr1;
