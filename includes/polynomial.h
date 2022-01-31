@@ -1,4 +1,0 @@
-#ifndef _POLYNOMIAL_LINKED_LIST_
-# define _POLYNOMIAL_LINKED_LIST_
-
-#endif
