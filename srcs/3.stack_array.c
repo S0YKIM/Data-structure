@@ -43,13 +43,18 @@ int pushAS(ArrayStack* pStack, ArrayStackNode element)
 */
 ArrayStackNode*	popAS(ArrayStack* pStack)
 {
-	ArrayStackNode	*element;
+	ArrayStackNode	*new;
+	ArrayStackNode	*top;
 
-	element = peekAS(pStack);
-	if (!element)
+	top = peekAS(pStack);
+	if (!top)
 		return (NULL);
+	new = (ArrayStackNode *)malloc(sizeof(ArrayStackNode));
+	if (!new)
+		return (NULL);
+	*new = *top;
 	pStack->currentElementCount--;
-	return (element);
+	return (new);
 }
 
 /*
@@ -113,7 +118,7 @@ void	displayArrayStack(ArrayStack* pStack)
 		return ;
 	if (!pStack->currentElementCount)
 	{
-		printf("Empty stack.");
+		printf("Empty stack.\n");
 		return ;
 	}
 	for (i = pStack->currentElementCount - 1; i >= 0 ; i--)

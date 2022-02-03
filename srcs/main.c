@@ -23,10 +23,11 @@ int	main(int argc, char **argv)
 			break ;
 		case 3 :
 			test_stack_array();
-			test_stack_linkedlist();
+			//test_stack_linkedlist();
 		default :
-			break ;		
+			break ;
 	}
+
 	// 2.circular_linked_list
 
 
@@ -83,7 +84,7 @@ int	main(int argc, char **argv)
 
 	// 12. search
 
-
+	system("leaks data_structure");
 
 	return (0);
 }

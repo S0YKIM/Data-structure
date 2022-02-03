@@ -6,6 +6,7 @@ void	test_stack_array()
 	ArrayStackNode	element;
 	ArrayStackNode	*result;
 
+	printf("\n ***** Array Stack ***** \n");
 	stack = createArrayStack(3);
 	element.data = 'a';
 	pushAS(stack, element);
@@ -22,10 +23,13 @@ void	test_stack_array()
 
 	result = popAS(stack);
 	printf("pop: %c\n", result->data);
+	free(result);
 	result = popAS(stack);
 	printf("pop: %c\n", result->data);
+	free(result);
 	result = popAS(stack);
 	printf("pop: %c\n", result->data);
+	free(result);
 	result = popAS(stack);
 	if (result)
 		printf("pop: %c\n", result->data);
@@ -41,6 +45,7 @@ void	test_stack_linkedlist()
 	StackNode		element;
 	StackNode		*result;
 
+	printf("\n ***** Linkedlist Stack ***** \n");
 	stack = createLinkedStack();
 	element.data = 'a';
 	pushLS(stack, element);
