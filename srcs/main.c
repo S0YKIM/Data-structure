@@ -23,7 +23,7 @@ int	main(int argc, char **argv)
 			break ;
 		case 3 :
 			test_stack_array();
-			//test_stack_linkedlist();
+			test_stack_linkedlist();
 		default :
 			break ;
 	}
