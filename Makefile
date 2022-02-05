@@ -10,7 +10,7 @@ FILES = main \
 	   2.double_linked_list \
 	   3.stack_array \
 	   3.stack_linked_list \
-	   4.maze \
+	   4.stack_maze \
 	   5.circular_queue \
 	   5.deque \
 	   5.queue \
@@ -31,7 +31,8 @@ FILES = main \
 
 FILES_TEST = test_linked_list \
 	   		test_polynomial \
-	   		test_stack
+	   		test_stack \
+			test_stack_maze
 
 SRCS_DIR = srcs/
 SRCS_TEST_DIR = test/

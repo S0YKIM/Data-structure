@@ -24,6 +24,8 @@ int	main(int argc, char **argv)
 		case 3 :
 			test_stack_array();
 			test_stack_linkedlist();
+		case 4 :
+			test_maze();
 		default :
 			break ;
 	}

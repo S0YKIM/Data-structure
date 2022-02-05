@@ -4,6 +4,9 @@
 typedef struct StackNodeType
 {
 	char data;
+	int	h;
+	int	w;
+	int	direction;
 	struct StackNodeType* pLink;
 } StackNode;
 

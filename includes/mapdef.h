@@ -1,26 +1,35 @@
 #ifndef _MAP_DEF_
-#define _MAP_DEF_
+# define _MAP_DEF_
 
-#define WIDTH 8
-#define HEIGHT 8
+# define WIDTH 8
+# define HEIGHT 8
 
-#define NUM_DIRECTIONS 4
+# define NUM_DIRECTIONS 4
 
-// offset: x, y
+# define TRUE 1
+# define FALSE 0
+# define ERROR -1
+
+// offset: h, w
 static int DIRECTION_OFFSETS[NUM_DIRECTIONS][2] = {
-	{0, -1},		// À§ÂÊÀ¸·Î ÀÌµ¿.
-	{1, 0},			// ¿À¸¥ÂÊÀ¸·Î ÀÌµ¿.
-	{0, 1},			// ¾Æ·¡ÂÊÀ¸·Î ÀÌµ¿.
-	{-1, 0}			// ¿ŞÂÊÀ¸·Î ÀÌµ¿.
+	{0, 1},			// 0: ì˜¤ë¥¸ìª½ìœ¼ë¡œ ì´ë™
+	{1, 0},			// 1: ì•„ë˜ë¡œ ì´ë™
+	{0, -1},		// 2: ì™¼ìª½ìœ¼ë¡œ ì´ë™
+	{-1, 0}			// 3: ìœ„ë¡œ ì´ë™
 };
 
-enum PosStatus { NOT_VISIT = 0, WALL = 1 , VISIT = 2  };
+enum	PosStatus { NOT_VISITED = 0, WALL = 1, VISITED = 2, START = 3, END = 4 };
+enum	PosDirection { RIGHT = 0, DOWN = 1, LEFT = 2, UP = 3 };
 
-typedef struct MapPositionType
-{
-	int x;				// ÇöÀç À§Ä¡ xÁÂÇ¥.
-	int y;				// ÇöÀç À§Ä¡ yÁÂÇ¥.
-	int direction;		// ´ÙÀ½ À§Ä¡·Î ÀÌµ¿ ¹æÇâ.
-} MapPosition;
+void findPath(int mazeArray[HEIGHT][WIDTH], StackNode startPos, StackNode endPos, LinkedStack *pStack);
+void showPath(LinkedStack *pStack, int mazeArray[HEIGHT][WIDTH]);
+void printMaze(int mazeArray[HEIGHT][WIDTH]);
+
+/* Custom */
+
+int findPosition(int map[HEIGHT][WIDTH], StackNode *position, int element);
+int findNotVisited(int mazeArray[HEIGHT][WIDTH], StackNode player, LinkedStack *pStack);
+int findVisited(int mazeArray[HEIGHT][WIDTH], StackNode player, LinkedStack *pStack);
+void	printError(char *message);
 
 #endif
