@@ -46,10 +46,7 @@ StackNode*	popLS(LinkedStack* pStack)
 	element = peekLS(pStack);
 	if (!element)
 		return (NULL);
-	if (pStack->currentElementCount == 1)
-		pStack->pTopElement = NULL;
-	else
-		pStack->pTopElement = element->pLink;
+	pStack->pTopElement = element->pLink;
 	pStack->currentElementCount--;
 	return (element);
 }
