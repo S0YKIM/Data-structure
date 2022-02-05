@@ -10,5 +10,6 @@
 # include "doublylist.h"
 # include "arraystack.h"
 # include "linkedstack.h"
+# include "mapdef.h"
 
 #endif
