@@ -1,6 +1,7 @@
 # DATA_STRUCTURE STUDY
 
-## curriculum
+## CURRICULUM
+
 # Day1
 - array
 - linked list
@@ -16,7 +17,8 @@
 - stack linked list
 
 # Day4
-- maze
+![preview](./img/stack_maze.png)
+- stack maze
 
 # Day5
 - circular queue
