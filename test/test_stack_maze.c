@@ -18,7 +18,7 @@ void    test_maze()
             {1, 1, 1, 1, 1, 1, 1, 4},
         };
     StackNode startPos;
-    StackNode endPos;
+    // StackNode endPos;
     LinkedStack *stack;
     int result;
     
@@ -28,12 +28,12 @@ void    test_maze()
         printError("Failed to find the start position.");
         return ;
     }
-    result = findPosition(map, &endPos, END);
-    if (!result)
-    {
-        printError("Failed to find the end position.");
-        return ;
-    }
+    // result = findPosition(map, &endPos, END);
+    // if (!result)
+    // {
+    //     printError("Failed to find the end position.");
+    //     return ;
+    // }
 
     stack = createLinkedStack();
     if (!stack)
@@ -41,5 +41,5 @@ void    test_maze()
         printError("Failed to create the stack.");
         return ;
     }
-    findPath(map, startPos, endPos, stack);
+    findPath(map, startPos, stack);
 }
