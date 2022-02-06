@@ -1,39 +1,38 @@
 #include "data_structure.h"
 
 // 비정상 종료 (w/ memory free)
-void    exitError(char *message, LinkedStack *pStack)
+void	exitError(char *message, LinkedStack *pStack)
 {
-    fprintf(stderr, "%s\n", message);
-    if (pStack)
-        deleteLinkedStack(&pStack);
-    system("leaks data_structure");
-    exit(EXIT_FAILURE);
+	fprintf(stderr, "%s\n", message);
+	if (pStack)
+		deleteLinkedStack(&pStack);
+	system("leaks data_structure");
+	exit(EXIT_FAILURE);
 }
 
 // 정상 종료 (w/ memory free)
-void    exitSuccess(char *message, LinkedStack *pStack)
+void	exitSuccess(char *message, LinkedStack *pStack)
 {
-    printf("%s\n", message);
-    deleteLinkedStack(&pStack);
-    system("leaks data_structure");
-    exit(EXIT_SUCCESS);
+	printf("%s\n", message);
+	deleteLinkedStack(&pStack);
+	system("leaks data_structure");
+	exit(EXIT_SUCCESS);
 }
 
 // START 와 END 위치 저장
-int findPosition(int map[HEIGHT][WIDTH], StackNode *position, int element)
+int	findPosition(int map[HEIGHT][WIDTH], StackNode *position, int element)
 {
 	int i;
 	int j;
 
-	if (!map || !(*map) || !position)
+	if (!position)
 		return (FALSE);
 	if (element != START && element != END)
 		return (FALSE);
 	i = 0;
-	while (i < HEIGHT)
+	for (i = 0; i < HEIGHT; i++)
 	{
-		j = 0;
-		while (j < WIDTH)
+		for (j = 0; j < WIDTH; j++)
 		{
 			if (map[i][j] == element)
 			{
@@ -41,15 +40,13 @@ int findPosition(int map[HEIGHT][WIDTH], StackNode *position, int element)
 				position->w = j;
 				return (TRUE);
 			}
-			j++;
 		}
-		i++;
 	}
 	return (FALSE);
 }
 
 // 출구까지의 최단 경로 발자국으로 출력
-void showPath(LinkedStack *pStack, int mazeArray[HEIGHT][WIDTH])
+void	showPath(LinkedStack *pStack, int mazeArray[HEIGHT][WIDTH])
 {
 	StackNode	*current;
 	int			i;
@@ -103,7 +100,7 @@ void showPath(LinkedStack *pStack, int mazeArray[HEIGHT][WIDTH])
 }
 
 // 맵 출력
-void printMaze(int mazeArray[HEIGHT][WIDTH])
+void	printMaze(int mazeArray[HEIGHT][WIDTH])
 {
 	int	i;
 	int	j;
@@ -117,10 +114,10 @@ void printMaze(int mazeArray[HEIGHT][WIDTH])
 }
 
 // 아직 방문하지 않은 길이 있으면 가기 (스택 노드 추가/PUSH)
-int findNotVisited(int mazeArray[HEIGHT][WIDTH], StackNode *player, LinkedStack *pStack)
+int	findNotVisited(int mazeArray[HEIGHT][WIDTH], StackNode *player, LinkedStack *pStack)
 {
-	int h;
-	int w;
+	int	h;
+	int	w;
 
 	player->direction = RIGHT;
 	while (player->direction <= UP)
@@ -145,10 +142,10 @@ int findNotVisited(int mazeArray[HEIGHT][WIDTH], StackNode *player, LinkedStack 
 }
 
 // 더 이상 방문하지 않은 길은 없다면 이미 방문한 길로 되돌아가기 (스택 노드 제거/POP) 
-int findVisited(int mazeArray[HEIGHT][WIDTH], StackNode *player, LinkedStack *pStack)
+int	findVisited(int mazeArray[HEIGHT][WIDTH], StackNode *player, LinkedStack *pStack)
 {
-	int 		h;
-	int	 		w;
+	int	h;
+	int	w;
 	StackNode	*element;
 
 	player->direction = UP;
@@ -176,8 +173,8 @@ int findVisited(int mazeArray[HEIGHT][WIDTH], StackNode *player, LinkedStack *pS
 // 미로 출구 찾기
 void findPath(int mazeArray[HEIGHT][WIDTH], StackNode startPos, LinkedStack *pStack)
 {
-	StackNode 	player;
-	int       	result;
+	StackNode	player;
+	int			result;
 	StackNode	*top;
 
 	player.h = startPos.h;
