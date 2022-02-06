@@ -21,15 +21,15 @@ static int DIRECTION_OFFSETS[NUM_DIRECTIONS][2] = {
 enum	PosStatus { NOT_VISITED = 0, WALL = 1, VISITED = 2, START = 3, END = 4 };
 enum	PosDirection { RIGHT = 0, DOWN = 1, LEFT = 2, UP = 3 };
 
-void findPath(int mazeArray[HEIGHT][WIDTH], StackNode startPos, StackNode endPos, LinkedStack *pStack);
+void findPath(int mazeArray[HEIGHT][WIDTH], StackNode startPos, LinkedStack *pStack);
 void showPath(LinkedStack *pStack, int mazeArray[HEIGHT][WIDTH]);
 void printMaze(int mazeArray[HEIGHT][WIDTH]);
 
 /* Custom */
 
 int findPosition(int map[HEIGHT][WIDTH], StackNode *position, int element);
-int findNotVisited(int mazeArray[HEIGHT][WIDTH], StackNode player, LinkedStack *pStack);
-int findVisited(int mazeArray[HEIGHT][WIDTH], StackNode player, LinkedStack *pStack);
+int findNotVisited(int mazeArray[HEIGHT][WIDTH], StackNode *player, LinkedStack *pStack);
+int findVisited(int mazeArray[HEIGHT][WIDTH], StackNode *player, LinkedStack *pStack);
 void	printError(char *message);
 
 #endif
