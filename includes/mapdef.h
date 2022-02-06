@@ -30,6 +30,7 @@ void printMaze(int mazeArray[HEIGHT][WIDTH]);
 int findPosition(int map[HEIGHT][WIDTH], StackNode *position, int element);
 int findNotVisited(int mazeArray[HEIGHT][WIDTH], StackNode *player, LinkedStack *pStack);
 int findVisited(int mazeArray[HEIGHT][WIDTH], StackNode *player, LinkedStack *pStack);
-void	printError(char *message);
+void	exitError(char *message, LinkedStack *pStack);
+void    exitSuccess(char *message, LinkedStack *pStack);
 
 #endif

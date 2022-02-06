@@ -1,5 +1,25 @@
 #include "data_structure.h"
 
+// 비정상 종료 (w/ memory free)
+void    exitError(char *message, LinkedStack *pStack)
+{
+    fprintf(stderr, "%s\n", message);
+    if (pStack)
+        deleteLinkedStack(&pStack);
+    system("leaks data_structure");
+    exit(EXIT_FAILURE);
+}
+
+// 정상 종료 (w/ memory free)
+void    exitSuccess(char *message, LinkedStack *pStack)
+{
+    printf("%s\n", message);
+    deleteLinkedStack(&pStack);
+    system("leaks data_structure");
+    exit(EXIT_SUCCESS);
+}
+
+// START 와 END 위치 저장
 int findPosition(int map[HEIGHT][WIDTH], StackNode *position, int element)
 {
 	int i;
@@ -9,7 +29,6 @@ int findPosition(int map[HEIGHT][WIDTH], StackNode *position, int element)
 		return (FALSE);
 	if (element != START && element != END)
 		return (FALSE);
-	
 	i = 0;
 	while (i < HEIGHT)
 	{
@@ -29,35 +48,21 @@ int findPosition(int map[HEIGHT][WIDTH], StackNode *position, int element)
 	return (FALSE);
 }
 
+// 출구까지의 최단 경로 발자국으로 출력
 void showPath(LinkedStack *pStack, int mazeArray[HEIGHT][WIDTH])
 {
 	StackNode	*current;
 	int			i;
 	int			j;
 	char		footprint;
-	char		map[HEIGHT][WIDTH] = {
-		{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-		{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-		{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-		{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-		{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-		{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-		{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-		{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-	};
+	char		map[HEIGHT][WIDTH];
 
-	i = 0;
-	while (i < HEIGHT)
+	for (i = 0; i < HEIGHT; i++)
 	{
-		j = 0;
-		while (j < WIDTH)
-		{
-			printf("%c ", map[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
+		for (j = 0; j < WIDTH; j++)
+			map[i][j] = ' ';
 	}
+
 	current = peekLS(pStack);
 	if (!current)
 		return ;
@@ -76,63 +81,42 @@ void showPath(LinkedStack *pStack, int mazeArray[HEIGHT][WIDTH])
 		current = current->pLink;
 	}
 
-	i = 0;
-	while (i < HEIGHT)
+	for (i = 0; i < HEIGHT; i++)
 	{
-		j = 0;
-		while (j < WIDTH)
+		for (j = 0; j < WIDTH; j++)
 		{
 			if (mazeArray[i][j] == WALL)
-			{
 				map[i][j] = '*';
-			}
 			else if (mazeArray[i][j] == START)
-			{
 				map[i][j] = 'S';
-			}
 			else if (mazeArray[i][j] == END)
-			{
 				map[i][j] = 'E';
-			}
-			j++;
 		}
-		i++;
 	}
 
-	i = 0;
-	while (i < HEIGHT)
+	for (i = 0; i < HEIGHT; i++)
 	{
-		j = 0;
-		while (j < WIDTH)
-		{
+		for (j = 0; j < WIDTH; j++)
 			printf("%c ", map[i][j]);
-			j++;
-		}
 		printf("\n");
-		i++;
 	}
 }
 
-// // 맵 출력
+// 맵 출력
 void printMaze(int mazeArray[HEIGHT][WIDTH])
 {
 	int	i;
 	int	j;
 
-	i = 0;
-	while (i < HEIGHT)
+	for (i = 0; i < HEIGHT; i++)
 	{
-		j = 0;
-		while (j < WIDTH)
-		{
-			printf("%c ", mazeArray[i][j]);
-			j++;
-		}
+		for (j = 0; j < WIDTH; j++)
+			printf("%i ", mazeArray[i][j]);
 		printf("\n");
-		i++;
 	}
 }
 
+// 아직 방문하지 않은 길이 있으면 가기 (스택 노드 추가/PUSH)
 int findNotVisited(int mazeArray[HEIGHT][WIDTH], StackNode *player, LinkedStack *pStack)
 {
 	int h;
@@ -143,20 +127,12 @@ int findNotVisited(int mazeArray[HEIGHT][WIDTH], StackNode *player, LinkedStack 
 	{
 		h = player->h + DIRECTION_OFFSETS[player->direction][0];
 		w = player->w + DIRECTION_OFFSETS[player->direction][1];
-		if (mazeArray[h][w] == END)
+		if (h >= HEIGHT || w >= WIDTH)
 		{
-			printf("Success!\n");
-			showPath(pStack, mazeArray);
-			system("leaks data_structure");
-			exit(0);
+			player->direction++;
+			continue ;
 		}
-		else if (mazeArray[h][w] == START)
-		{
-			printf("Fail!\n");
-			printMaze(mazeArray);
-			exit(0);
-		}
-		else if (mazeArray[h][w] == NOT_VISITED)
+		else if (mazeArray[h][w] == NOT_VISITED || mazeArray[h][w] == END)
 		{
 			player->h = h;
 			player->w = w;
@@ -168,6 +144,7 @@ int findNotVisited(int mazeArray[HEIGHT][WIDTH], StackNode *player, LinkedStack 
 	return (FALSE);
 }
 
+// 더 이상 방문하지 않은 길은 없다면 이미 방문한 길로 되돌아가기 (스택 노드 제거/POP) 
 int findVisited(int mazeArray[HEIGHT][WIDTH], StackNode *player, LinkedStack *pStack)
 {
 	int 		h;
@@ -179,8 +156,12 @@ int findVisited(int mazeArray[HEIGHT][WIDTH], StackNode *player, LinkedStack *pS
 	{
 		h = player->h + DIRECTION_OFFSETS[player->direction][0];
 		w = player->w + DIRECTION_OFFSETS[player->direction][1];
-		
-		if (mazeArray[h][w] == VISITED)
+		if (h >= HEIGHT || w >= WIDTH)
+		{
+			player->direction--;
+			continue ;
+		}
+		else if (mazeArray[h][w] == VISITED || mazeArray[h][w] == START)
 		{
 			element = popLS(pStack);
 			free(element);
@@ -192,6 +173,7 @@ int findVisited(int mazeArray[HEIGHT][WIDTH], StackNode *player, LinkedStack *pS
 	return (FALSE);
 }
 
+// 미로 출구 찾기
 void findPath(int mazeArray[HEIGHT][WIDTH], StackNode startPos, LinkedStack *pStack)
 {
 	StackNode 	player;
@@ -204,24 +186,28 @@ void findPath(int mazeArray[HEIGHT][WIDTH], StackNode startPos, LinkedStack *pSt
 
 	result = pushLS(pStack, player);
 	if (!result)
-	{
-		printError("Failed to push the map position into the stack.");
-		return ;
-	}
+		exitError("Failed to push the map position into the stack.", pStack);
 
 	while (1)
 	{
 		result = findNotVisited(mazeArray, &player, pStack);
 		if (!result)
-		{
-			findVisited(mazeArray, &player, pStack);
-		}
+			result = findVisited(mazeArray, &player, pStack);
 		top = peekLS(pStack);
-		printf("top->h: %i\n", top->h);
-		printf("top->w: %i\n", top->w);
 		if (!top)
-			exit(1);
-		mazeArray[top->h][top->w] = VISITED;
+			exitError("Failed to find the top node.", pStack);
+		if (mazeArray[top->h][top->w] == END)
+		{
+			showPath(pStack, mazeArray);
+			exitSuccess("Success!", pStack);
+		}
+		else if (mazeArray[top->h][top->w] == START && !result)
+		{
+			printMaze(mazeArray);
+			exitSuccess("Invalid path to the wayout!", pStack);
+		}
+		if (mazeArray[top->h][top->w] != START)
+			mazeArray[top->h][top->w] = VISITED;
 		player = *top;
 	}
 }
