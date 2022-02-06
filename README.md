@@ -1,53 +1,53 @@
 # DATA_STRUCTURE STUDY
 
-## 🏁 CURRICULUM
+# 🏁 CURRICULUM
 
-# ✔️ Day1
+## ✔️ Day1
 - array
 - linked list
 
-# ✔️ Day2
+## ✔️ Day2
 - circular linked list
 - double linked list
 - polynomial addtion
 - reverse linked list
 
-# ✔️ Day3
+## ✔️ Day3
 - stack array
 - stack linked list
 
-# ✔️ Day4
+## ✔️ Day4
 ![preview](./img/stack_maze.png)
 - stack maze
 
-# ✔️ Day5
+## ✔️ Day5
 - circular queue
 - deque
 - queue
 
-# ✔️ Day6
+## ✔️ Day6
 - queue simulation
 
-# ✔️ Day7
+## ✔️ Day7
 - binary tree traversal
 - binary tree
 
-# ✔️ Day8
+## ✔️ Day8
 - binary search tree(BST)
 - heap
 
-# ✔️ Day9
+## ✔️ Day9
 - array graph
 - linked list graph
 
-# ✔️ Day10
+## ✔️ Day10
 - dijkstra
 - floyd
 - kruskal
 - minimun spanning tree
 - prim
 
-# ✔️ Day11
+## ✔️ Day11
 - bubble sort
 - selection sort
 - insertion sort
@@ -56,13 +56,13 @@
 - radix sort
 - quick sort
 
-# ✔️ Day12
+## ✔️ Day12
 - linear search
 - binary search
 - hash search
 - BST
 
 
-### RUN
+## 🌻 RUN
 `make all`
-`./data_structure`
+`./data_structure + NUMBER`
