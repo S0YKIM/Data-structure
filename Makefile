@@ -30,6 +30,7 @@ FILES = main \
 	   12.search
 
 FILES_TEST = test_linked_list \
+			test_circular_list \
 	   		test_polynomial \
 	   		test_stack \
 			test_stack_maze

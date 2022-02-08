@@ -13,13 +13,12 @@ int	main(int argc, char **argv)
 
 	switch (number)
 	{
-		// 1. array
-		// 1.linked_list
 		case 1 :
 			test_linked_list();
 			break ;
 		case 2 :
-			test_polynomial();
+			test_circular_list();
+			//test_polynomial();
 			break ;
 		case 3 :
 			test_stack_array();

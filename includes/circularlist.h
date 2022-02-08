@@ -8,7 +8,11 @@ ListNode* getCircularElement(LinkedList* pList, int position);
 
 void clearCircularList(LinkedList* pList);
 int getCircularListLength(LinkedList* pList);
-void deleteList(LinkedList* pList);
+void deleteCircularList(LinkedList** pList);
+
+/*커스텀 함수*/
+void	displayCircularList(LinkedList *pList);
+
 #endif
 
 #ifndef _COMMON_LIST_DEF_

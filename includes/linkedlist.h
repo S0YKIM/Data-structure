@@ -30,8 +30,8 @@ void	deleteLinkedList(LinkedList** pList);
 /*
 커스텀 함수
 */
-void	displayLinkedList(LinkedList *list);
-int		iterateLinkedList(LinkedList *list);
+void	displayLinkedList(LinkedList *pList);
+int		iterateLinkedList(LinkedList *pList);
 void	reverseLinkedList(LinkedList* pList);
 
 /*
