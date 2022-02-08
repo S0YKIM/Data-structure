@@ -81,7 +81,6 @@ int	removeCircularElement(LinkedList* pList, int position)
 		if (pList->currentElementCount == 1)
 		{
 			pList->headerNode.pLink = NULL;
-			ptr->pLink = NULL;
 			free(ptr);
 			ptr = NULL;
 		}
@@ -139,12 +138,15 @@ ListNode	*getCircularElement(LinkedList* pList, int position)
 void	clearCircularList(LinkedList* pList)
 {
 	ListNode	*ptr;
+	int				i;
 
 	ptr = pList->headerNode.pLink;
-	while (ptr)
+	i = pList->currentElementCount;
+	while (i)
 	{
 		ptr->data = 0;
 		ptr = ptr->pLink;
+		i--;
 	}
 }
 

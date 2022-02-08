@@ -17,7 +17,8 @@ int	main(int argc, char **argv)
 			test_linked_list();
 			break ;
 		case 2 :
-			test_circular_list();
+			//test_circular_list();
+			test_double_list();
 			//test_polynomial();
 			break ;
 		case 3 :
