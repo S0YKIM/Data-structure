@@ -10,14 +10,7 @@
 # define FALSE 0
 # define ERROR -1
 
-// offset: h, w
-static int DIRECTION_OFFSETS[NUM_DIRECTIONS][2] = {
-	{0, 1},			// 0: 오른쪽으로 이동
-	{1, 0},			// 1: 아래로 이동
-	{0, -1},		// 2: 왼쪽으로 이동
-	{-1, 0}			// 3: 위로 이동
-};
-
+extern int DIRECTION_OFFSETS[NUM_DIRECTIONS][2];
 enum	PosStatus { NOT_VISITED = 0, WALL = 1, VISITED = 2, START = 3, END = 4 };
 enum	PosDirection { RIGHT = 0, DOWN = 1, LEFT = 2, UP = 3 };
 

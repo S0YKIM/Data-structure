@@ -1,5 +1,13 @@
 #include "data_structure.h"
 
+// offset: h, w
+int DIRECTION_OFFSETS[NUM_DIRECTIONS][2] = {
+	{0, 1},			// 0: 오른쪽으로 이동
+	{1, 0},			// 1: 아래로 이동
+	{0, -1},		// 2: 왼쪽으로 이동
+	{-1, 0}			// 3: 위로 이동
+};
+
 // 비정상 종료 (w/ memory free)
 void	exitError(char *message, LinkedStack *pStack)
 {

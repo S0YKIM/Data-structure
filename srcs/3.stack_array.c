@@ -74,8 +74,8 @@ ArrayStackNode*	peekAS(ArrayStack* pStack)
 */
 void	deleteArrayStack(ArrayStack** pStack)
 {
-    if (!pStack || !(*pStack))
-        return ;
+  if (!pStack || !(*pStack))
+    return ;
 	free((*pStack)->pElement);
 	free(*pStack);
 	*pStack = NULL;
