@@ -53,7 +53,7 @@ int	addCircularElement(LinkedList* pList, int position, ListNode element)
 		// 중간 삽입
 		else
 		{
-			ptr = getCircularElement(pList, position);
+			ptr = getCircularElement(pList, position - 1);
 			new_node->pLink = ptr->pLink;
 			ptr->pLink = new_node;
 		}
