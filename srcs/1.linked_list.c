@@ -12,7 +12,7 @@ LinkedList	*createLinkedList()
         return (NULL);
     lst->currentElementCount = 0;
     lst->headerNode.data = 0;
-    lst->headerNode.pLink = 0;
+    lst->headerNode.pLink = NULL;
     return (lst);
 }
 
@@ -101,6 +101,7 @@ int	removeLLElement(LinkedList* pList, int position)
 			free(tmp);
 			tmp = NULL;
 		}
+		pList->currentElementCount--;
 		return (TRUE);
 	}
 	return (FALSE);
@@ -170,13 +171,13 @@ void deleteLinkedList(LinkedList** pList)
 /*
 (Bonus) 연결리스트의 모든 데이터 출력
 */
-void	displayLinkedList(LinkedList *list)
+void	displayLinkedList(LinkedList *pList)
 {
 	ListNode	*ptr;
 
-	if (!list)
+	if (!pList)
 		return ;
-	ptr = list->headerNode.pLink;
+	ptr = pList->headerNode.pLink;
 	while (ptr)
 	{
 		printf("%i ", ptr->data);
@@ -188,15 +189,15 @@ void	displayLinkedList(LinkedList *list)
 /*
 (Bonus) 연결리스트의 노드 개수 반환
 */
-int	iterateLinkedList(LinkedList *list)
+int	iterateLinkedList(LinkedList *pList)
 {
 	ListNode	*ptr;
 	int			cnt;
 
-	if (!list)
+	if (!pList)
 		return (-1);
 	cnt = 0;
-	ptr = list->headerNode.pLink;
+	ptr = pList->headerNode.pLink;
 	while (ptr)
 	{
 		cnt++;
@@ -258,13 +259,13 @@ int	addPolyElement(LinkedList* pList, ListNode element)
 /*
 (Bonus) 다항식 연결 리스트 출력
 */
-void	displayPolyList(LinkedList *list)
+void	displayPolyList(LinkedList *pList)
 {
 	ListNode	*ptr;
 
-	if (!list)
+	if (!pList)
 		return ;
-	ptr = list->headerNode.pLink;
+	ptr = pList->headerNode.pLink;
 	while (ptr)
 	{
 		printf("%.1f", ptr->coef);
