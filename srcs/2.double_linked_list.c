@@ -57,7 +57,7 @@ int	addDLElement(DoublyList* pList, int position, DoublyListNode element)
 		// 중간 삽입
 		else
 		{
-			ptr = getDLElement(pList, position);
+			ptr = getDLElement(pList, position - 1);
 			new_node->pLLink = ptr;
 			new_node->pRLink = ptr->pRLink;
 			new_node->pRLink->pLLink = new_node;

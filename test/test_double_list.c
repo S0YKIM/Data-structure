@@ -15,6 +15,9 @@ void	test_double_list()
 		node.data = i;
 		addDLElement(list, 0, node);
 	}
+	// Adding node into second place
+	node.data = 1004;
+	addDLElement(list, 1, node);
 	displayDoublyList(list);
 
 	// Removing the second node
