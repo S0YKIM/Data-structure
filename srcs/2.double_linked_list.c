@@ -9,7 +9,7 @@ DoublyList	*createDoublyList()
 
 		lst = (DoublyList*)malloc(sizeof(DoublyList));
 		if (!lst)
-				return (NULL);
+			return (NULL);
 		lst->currentElementCount = 0;
 		lst->headerNode.data = 0;
 		lst->headerNode.pLLink = NULL;
