@@ -11,5 +11,7 @@
 # include "arraystack.h"
 # include "linkedstack.h"
 # include "mapdef.h"
+# include "arrayqueue.h"
+# include "linkeddeque.h"
 
 #endif

@@ -8,5 +8,7 @@ void	test_polynomial();
 void	test_stack_array();
 void	test_stack_linkedlist();
 void	test_maze();
+void	test_queue();
+void	test_deque();
 
 #endif
