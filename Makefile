@@ -34,7 +34,9 @@ FILES_TEST = test_linked_list \
 			test_double_list \
 	   		test_polynomial \
 	   		test_stack \
-			test_stack_maze
+			test_stack_maze \
+			test_queue \
+			test_deque
 
 SRCS_DIR = srcs/
 SRCS_TEST_DIR = test/
