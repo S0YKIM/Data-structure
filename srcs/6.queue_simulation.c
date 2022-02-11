@@ -95,7 +95,9 @@ void	printHistoryQueue(LinkedQueue *pHistoryQueue)
 
 	if (!pHistoryQueue)
 		return ;
-	printf("---------------------------------------\n");
+	printf("\n-----------------------------------------\n");
+	printf("              Service History            \n");
+	printf("-----------------------------------------\n");
 	ptr = pHistoryQueue->pFrontNode;
 	i = 1;
 	while (ptr)
@@ -128,5 +130,4 @@ void	printReport(LinkedQueue *pWaitQueue, LinkedQueue *pArrivalQueue, LinkedQueu
 	printf("Number of customers who got serviced : %i\n", serviceUserCount);
     printf("Total waiting time : %i\n", totalWaitTime);
 	printHistoryQueue(historyQueue);
-	printf("---------------------------------------\n");
 }
