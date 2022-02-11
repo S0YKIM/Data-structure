@@ -35,9 +35,12 @@ LinkedQueueNode* processServiceNodeEnd(int currentTime, LinkedQueueNode *pServic
 void printSimCustomer(int currentTime, SimCustomer customer);
 
 // 대기 큐의 상태 출력
-void printWaitQueueStatus(int currentTime, LinkedQueue *pWaitQueue);
+void printWaitQueueStatus(LinkedQueue *pWaitQueue);
 
 // 최종 시뮬레이션 결과 출력
-void printReport(LinkedQueue *pWaitQueue, LinkedQueue *pArrivalQueue, int serviceUserCount, int totalWaitTime);
+void printReport(LinkedQueue *pWaitQueue, LinkedQueue *pArrivalQueue, LinkedQueue *historyQueue, int serviceUserCount, int totalWaitTime);
+
+// (Custom) 이미 서비스 받은 고객 내역 출력
+void	printHistoryQueue(LinkedQueue *pHistoryQueue);
 
 #endif

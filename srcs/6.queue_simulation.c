@@ -55,8 +55,9 @@ LinkedQueueNode*	processServiceNodeEnd(int currentTime, LinkedQueueNode *pServic
 	if (!pServiceUserCount || !pServiceUserCount || !pTotalWaitTime)
         return NULL;
 	pServiceNode->data.endTime = currentTime;
+	pServiceNode->data.status = end;
 	*pTotalWaitTime += pServiceNode->data.startTime - pServiceNode->data.arrivalTime;
-	(*pServiceUserCount)--;
+	(*pServiceUserCount)++;
 	return (pServiceNode);
 }
 
@@ -72,24 +73,41 @@ void	printSimCustomer(int currentTime, SimCustomer customer)
 }
 
 
-void	printWaitQueueStatus(int currentTime, LinkedQueue *pWaitQueue)
+void	printWaitQueueStatus(LinkedQueue *pWaitQueue)
 {
 	LinkedQueueNode	*ptr;
 
 	if (!pWaitQueue)
 		return ;
-	printf("---------------------------------------\n");
-	printf("Current time : %i\n", currentTime);
 	ptr = pWaitQueue->pFrontNode;
 	while (ptr)
     {
-        printf("Status : %i (Arrival Time : %i, Service Time : %i)\n", ptr->data.status, ptr->data.arrivalTime, ptr->data.serviceTime);
+        printf("Arrival Time : %i, Service Time : %i\n", ptr->data.arrivalTime, ptr->data.serviceTime);
 		ptr = ptr->pElement;	
     }
 	printf("---------------------------------------\n");
 }
 
-void	printReport(LinkedQueue *pWaitQueue, LinkedQueue *pArrivalQueue, int serviceUserCount, int totalWaitTime)
+void	printHistoryQueue(LinkedQueue *pHistoryQueue)
+{
+	LinkedQueueNode	*ptr;
+	int				i;
+
+	if (!pHistoryQueue)
+		return ;
+	printf("---------------------------------------\n");
+	ptr = pHistoryQueue->pFrontNode;
+	i = 1;
+	while (ptr)
+    {	printf("Customer #%i\n", i++);
+        printf("Arrival time : %i\nService start time : %i\nService end time : %i\n", ptr->data.arrivalTime, ptr->data.startTime, ptr->data.endTime);
+		printf("---------------------------------------\n");
+		ptr = ptr->pElement;	
+    }
+	printf("---------------------------------------\n");
+}
+
+void	printReport(LinkedQueue *pWaitQueue, LinkedQueue *pArrivalQueue, LinkedQueue *historyQueue, int serviceUserCount, int totalWaitTime)
 {
 	if (!pWaitQueue || !pArrivalQueue)
     {
@@ -97,9 +115,18 @@ void	printReport(LinkedQueue *pWaitQueue, LinkedQueue *pArrivalQueue, int servic
 		return ;
     }
 	printf("---------------------------------------\n");
-	if (pWaitQueue->currentElementCount > 0 || pArrivalQueue->currentElementCount > 0)
-    	printf("There are remaining customers.\n");
-	printf("Number of customers who got serviced: %i\n", serviceUserCount);
+	if (pWaitQueue->currentElementCount > 0)
+    {
+		printf("Customers waiting : %i\n", pWaitQueue->currentElementCount);
+		printWaitQueueStatus(pWaitQueue);
+	}
+	if (pArrivalQueue->currentElementCount > 0)
+	{
+		printf("Customers came after closing time : %i\n", pArrivalQueue->currentElementCount);
+		printWaitQueueStatus(pArrivalQueue);
+	}
+	printf("Number of customers who got serviced : %i\n", serviceUserCount);
     printf("Total waiting time : %i\n", totalWaitTime);
+	printHistoryQueue(historyQueue);
 	printf("---------------------------------------\n");
 }

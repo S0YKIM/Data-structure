@@ -14,7 +14,7 @@ LinkedQueue* createLinkedQueue()
 
 	myQueue = (LinkedQueue *)calloc(1, sizeof(LinkedQueue));
 	if (!myQueue)
-		return FALSE;
+		return NULL;
 	return (myQueue);
 }
 
