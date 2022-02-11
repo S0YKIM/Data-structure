@@ -86,7 +86,6 @@ Deque: 덱의 프론트 노드 삭제
 */
 DequeNode*		deleteFrontLD(LinkedDeque* pDeque)
 {
-	
 	DequeNode *delNode;
 	
 	if (!pDeque)
