@@ -13,7 +13,8 @@ FILES = main \
 	   4.stack_maze \
 	   5.circular_queue \
 	   5.deque \
-	   5.queue \
+	   5.queue_array \
+	   6.queue_linked_list \
 	   6.queue_simulation \
 	   7.binary_tree_traversal \
 	   7.binary_tree \
@@ -35,8 +36,9 @@ FILES_TEST = test_linked_list \
 	   		test_polynomial \
 	   		test_stack \
 			test_stack_maze \
-			test_queue \
-			test_deque
+			test_queue_stack \
+			test_deque \
+			test_queue_simulation
 
 SRCS_DIR = srcs/
 SRCS_TEST_DIR = test/

@@ -10,5 +10,6 @@ void	test_stack_linkedlist();
 void	test_maze();
 void	test_queue();
 void	test_deque();
+void	test_queue_simulation();
 
 #endif

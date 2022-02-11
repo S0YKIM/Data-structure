@@ -13,5 +13,7 @@
 # include "mapdef.h"
 # include "arrayqueue.h"
 # include "linkeddeque.h"
+# include "linkedqueue.h"
+# include "queuesimulation.h"
 
 #endif
