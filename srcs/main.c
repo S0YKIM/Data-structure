@@ -29,8 +29,11 @@ int	main(int argc, char **argv)
 			test_maze();
 			break ;
 		case 5 :
-			//test_queue();
+			//test_queue_stack();
 			test_deque();
+			break ;
+		case 6 :
+			test_queue_simulation();
 			break ;
 		default :
 			break ;
