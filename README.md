@@ -26,6 +26,7 @@
 - queue
 
 ## ✔️ Day6
+![preview](./img/simulation.png)
 - queue simulation
 
 ## ✔️ Day7
