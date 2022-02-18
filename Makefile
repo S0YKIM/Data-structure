@@ -18,6 +18,7 @@ FILES = main \
 	   6.queue_simulation \
 	   7.binary_tree_traversal \
 	   7.binary_tree \
+	   7.binary_tree_queue \
 	   8.binary_search_tree \
 	   8.heap \
 	   9.array_graph \
@@ -33,12 +34,13 @@ FILES = main \
 FILES_TEST = test_linked_list \
 			test_circular_list \
 			test_double_list \
-	   		test_polynomial \
-	   		test_stack \
+			test_polynomial \
+			test_stack \
 			test_stack_maze \
 			test_queue_stack \
 			test_deque \
-			test_queue_simulation
+			test_queue_simulation \
+			test_binary_tree
 
 SRCS_DIR = srcs/
 SRCS_TEST_DIR = test/

@@ -35,36 +35,11 @@ int	main(int argc, char **argv)
 		case 6 :
 			test_queue_simulation();
 			break ;
+		case 7 :
+			test_binary_tree();
 		default :
 			break ;
 	}
-
-	// 2.circular_linked_list
-
-
-	// 2. double_linked_list
-
-
-	// 3. stack array
-
-
-	// 3. stack_linked_list
-
-
-	// 4. maze
-
-
-	// 5. circular queue
-
-
-	// 5. deque
-
-
-	// 5. queue
-
-
-	// 6. queue_simulation
-
 
 	// 7. binary_tree_traversal
 

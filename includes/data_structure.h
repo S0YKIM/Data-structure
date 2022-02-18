@@ -15,5 +15,7 @@
 # include "linkeddeque.h"
 # include "linkedqueue.h"
 # include "queuesimulation.h"
+# include "bintree.h"
+# include "binarytreequeue.h"
 
 #endif
