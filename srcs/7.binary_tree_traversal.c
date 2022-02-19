@@ -23,9 +23,9 @@ void	inorderTraversalBinTree(BinTreeNode *node)
 {
 	if (!node)
 		return ;
-	preorderTraversalBinTree(node->pLeftChild);
+	inorderTraversalBinTree(node->pLeftChild);
 	printf("data: %i ", node->data);
-	preorderTraversalBinTree(node->pRightChild);
+	inorderTraversalBinTree(node->pRightChild);
 }
 
 /*
@@ -35,8 +35,8 @@ void	postorderTraversalBinTree(BinTreeNode *node)
 {
 	if (!node)
 		return ;
-	preorderTraversalBinTree(node->pLeftChild);
-	preorderTraversalBinTree(node->pRightChild);
+	postorderTraversalBinTree(node->pLeftChild);
+	postorderTraversalBinTree(node->pRightChild);
 	printf("data: %i ", node->data);
 }
 
@@ -57,7 +57,7 @@ void	levelOrderTraversalBinTree(BinTreeNode *root)
 	while (!isLOQEmpty(queue))
 	{
 		frontNode = dequeueLOQ(queue);
-		printf("%i ", frontNode->treeNode.data);
+		printf("data: %i ", frontNode->treeNode.data);
 		if (getLeftChildNodeBT(&frontNode->treeNode))
 		{
 			tmp.treeNode = *(getLeftChildNodeBT(&frontNode->treeNode));
@@ -71,6 +71,8 @@ void	levelOrderTraversalBinTree(BinTreeNode *root)
 		free(frontNode);
 		frontNode = NULL;
 	}
+	if (frontNode)
+		free(frontNode);
 	free(queue);
 	queue = NULL;
 }
