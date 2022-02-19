@@ -61,27 +61,6 @@ static void	insertRightChildNodeBT(BinTreeNode* pParentNode, int data)
 	pParentNode->pRightChild = newnode;
 }
 
-void	insert(BinTreeNode *pParentNode, int data)
-{
-	if (!pParentNode)
-		return ;
-	if (data > pParentNode->data)
-	{
-		if (getRightChildNodeBT(pParentNode))
-			insert(pParentNode->pRightChild, data);
-		else
-			insertRightChildNodeBT(pParentNode, data);
-	}
-	else if (data < pParentNode->data)
-	{
-		if (getLeftChildNodeBT(pParentNode))
-			insert(pParentNode->pLeftChild, data);
-		else
-			insertLeftChildNodeBT(pParentNode, data);
-	}
-	else
-		printf("ERROR : Node overlapped\n");
-}
 
 BinTreeNode	*getLeftChildNodeBT(BinTreeNode* pNode)
 {
@@ -95,6 +74,28 @@ BinTreeNode	*getRightChildNodeBT(BinTreeNode* pNode)
 	if (!pNode)
 		return NULL;
 	return (pNode->pRightChild);
+}
+
+void	insertBinTreeNode(BinTreeNode *pParentNode, int data)
+{
+	if (!pParentNode)
+		return ;
+	if (data > pParentNode->data)
+	{
+		if (getRightChildNodeBT(pParentNode))
+			insertBinTreeNode(pParentNode->pRightChild, data);
+		else
+			insertRightChildNodeBT(pParentNode, data);
+	}
+	else if (data < pParentNode->data)
+	{
+		if (getLeftChildNodeBT(pParentNode))
+			insertBinTreeNode(pParentNode->pLeftChild, data);
+		else
+			insertLeftChildNodeBT(pParentNode, data);
+	}
+	else
+		printf("ERROR : Node overlapped\n");
 }
 
 /*
@@ -205,24 +206,31 @@ static BinTreeNode	*getParentNodeOfDeleteData(BinTreeNode *node, int data)
 
 	if (!node)
 		return (NULL);
+
+	// 삭제할 노드가 root 노드인 경우
 	if (data == node->data)
 		return (node);
+	// 삭제할 노드가 왼쪽 자식인 경우
 	if (node->pLeftChild)
 	{
 		if (data == node->pLeftChild->data)
 			return (node);
 	}
+	// 삭제할 노드가 오른쪽 자식인 경우
 	if (node->pRightChild)
 	{
 		if (data == node->pRightChild->data)
 			return (node);
 	}
+
 	temp = getParentNodeOfDeleteData(node->pLeftChild, data);
 	if (temp)		
 		return (temp);
+
 	temp = getParentNodeOfDeleteData(node->pRightChild, data);
 	if (temp)
 		return (temp);
+
 	return (NULL);
 }
 
@@ -244,6 +252,7 @@ void	deleteBinTreeNode(BinTree *pBinTree, int data)
 		pBinTree->pRootNode = successor;
 		return ;
 	}
+	// 부모 노드의 왼쪽 자식이 삭제할 노드인 경우
 	if (parentNode->pLeftChild)
 	{
 		if (parentNode->pLeftChild->data == data)
@@ -252,6 +261,7 @@ void	deleteBinTreeNode(BinTree *pBinTree, int data)
 			return ;
 		}
 	}
+	// 부모 노드의 오른쪽 자식이 삭제할 노드인 경우
 	if (parentNode->pRightChild)
 	{
 		if (parentNode->pRightChild->data == data)
