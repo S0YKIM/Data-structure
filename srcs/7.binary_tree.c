@@ -15,7 +15,6 @@ BinTree		*makeBinTree(BinTreeNode rootNode)
 	newNode = (BinTreeNode *)calloc(1, sizeof(BinTreeNode));
 	newNode->data = rootNode.data;
 	bintree->pRootNode = newNode;
-	// *(bintree->pRootNode) = rootNode;
 	return (bintree);
 }
 
@@ -81,7 +80,7 @@ void	insert(BinTreeNode *pParentNode, int data)
 			insertLeftChildNodeBT(pParentNode, data);
 	}
 	else
-		printf("ERROR : Node overlapped");
+		printf("ERROR : Node overlapped\n");
 }
 
 BinTreeNode	*getLeftChildNodeBT(BinTreeNode* pNode)
@@ -104,80 +103,168 @@ BinTreeNode	*getRightChildNodeBT(BinTreeNode* pNode)
 2: 왼쪽 자식 노드만 있음
 3: 양쪽 자식 노드 전부 있음
 */
-// static int	getChildNodeInfo(BinTreeNode* pNode)
-// {
-// 	int		cnt;
+static int	getChildNodeInfo(BinTreeNode* pNode)
+{
+	int		cnt;
 
-// 	if (!pNode)
-// 		return (ERROR);
-// 	cnt = 0;
-// 	if (getRightChildNodeBT(pNode))
-// 		cnt += 1;
-// 	if (getLeftChildNodeBT(pNode))
-// 		cnt += 2;
-// 	return (cnt);
-// }
-
-// /*
-// (오른쪽 자식 노드를 전달한 후에) 가장 값이 작은 노드 반환
-// */
-// static BinTreeNode	*getMinimumNode(BinTreeNode *pRightChild)
-// {
-// 	BinTreeNode *currNode;
-
-// 	currNode = pRightChild;
-// 	while (currNode->pLeftChild)
-// 		currNode = currNode->pLeftChild;
-// 	return (currNode);
-// }
-
-// /*
-// 오른쪽 자식 노드의 가장 작은 값을 successor 로 채택
-// */
-// static void	deleteBinTreeNode(BinTreeNode** pNode)
-// {
-// 	BinTreeNode	*tmp;
-
-// 	if (!pNode)
-// 		return ;
-// 	tmp = *pNode;
-
-// 	switch (getChildNodeInfo(*pNode))
-// 	{
-// 		case 0 :
-// 			free(*pNode);
-// 			*pNode = NULL;
-// 			break ;
-// 		case 1 :
-// 			*pNode = (*pNode)->pRightChild;
-// 			free(tmp);
-// 			tmp = NULL;
-// 			break ;
-// 		case 2 :
-// 			*pNode = (*pNode)->pLeftChild;
-// 			free(tmp);
-// 			tmp = NULL;
-// 			break ;
-// 		case 3 :
-// 			*pNode = getMinimumNode((*pNode)->pRightChild);
-// 			free(tmp);
-// 			tmp = NULL;
-// 			break ;
-// 	}
-// }
-// /*
-//  * data를 가진 node를 찾아서 삭제(순회 방식: 전위 순회)
-// */
-
-// void		delete(BinTree *pBinTree, int data)
-// {
-// 	// data 탐색
-// 	deleteBinTreeNode();
-// 	return ;
-// }
+	if (!pNode)
+		return (ERROR);
+	cnt = 0;
+	if (getRightChildNodeBT(pNode))
+		cnt += 1;
+	if (getLeftChildNodeBT(pNode))
+		cnt += 2;
+	return (cnt);
+}
 
 /*
-후위 순회를 통해 모든 노드 free, 전체 트리도 free
+(오른쪽 자식 노드를 전달한 후에) 해당 서브 트리에서 가장 값이 작은 노드 반환
+successor 를 가리키던 부모 노드의 포인터를 successor 의 오른쪽 자식을 가리키도록 변경
+*/
+static BinTreeNode	*getSwapNode(BinTreeNode *pRightChild)
+{
+	BinTreeNode	*parentNode;
+	BinTreeNode *swapNode;
+
+	parentNode = pRightChild;
+	if (!parentNode->pLeftChild)
+		return (parentNode);
+	while (parentNode->pLeftChild)
+	{
+		swapNode = parentNode->pLeftChild;
+		if (!swapNode->pLeftChild)
+		{
+			parentNode->pLeftChild = swapNode->pRightChild;
+			return (swapNode);
+		}
+		parentNode = parentNode->pLeftChild;
+	}
+	return (NULL);
+}
+
+/*
+노드를 삭제하고 그 자리를 successor 로 대체 
+*/
+static BinTreeNode	*replaceDeleteNodetoSuccessor(BinTreeNode** pNode)
+{
+	BinTreeNode	*tmp;
+	BinTreeNode	*successor;
+
+	if (!pNode)
+		return NULL;
+	tmp = *pNode;
+
+	switch (getChildNodeInfo(*pNode))
+	{
+		case 0 :
+			free(*pNode);
+			*pNode = NULL;
+			return NULL;
+			break ;
+		case 1 :
+			*pNode = (*pNode)->pRightChild;
+			free(tmp);
+			tmp = NULL;
+			return NULL;
+			break ;
+		case 2 :
+			*pNode = (*pNode)->pLeftChild;
+			free(tmp);
+			tmp = NULL;
+			return NULL;
+			break ;
+		case 3 :
+			*pNode = getSwapNode((*pNode)->pRightChild);
+			successor = *pNode;
+			(*pNode)->pLeftChild = tmp->pLeftChild;
+			if (successor != tmp->pRightChild)
+				(*pNode)->pRightChild = tmp->pRightChild;
+			free(tmp);
+			tmp = NULL;
+			return (successor);
+			break ;
+		default :
+			return NULL;
+			break ;
+	}
+}
+/*
+data를 가진 node를 찾아서 삭제(순회 방식: 전위 순회)
+전위 : Tree복제
+중위 : 값을 오름차순이나 내림차순으로 탐색(?)
+후위 : 트리 삭제
+-> 레벨 순회 선택
+*/
+
+/*
+삭제할 노드의 부모 노드를 반환
+*/
+static BinTreeNode	*getParentNodeOfDeleteData(BinTreeNode *node, int data)
+{
+	BinTreeNode *temp;
+
+	if (!node)
+		return (NULL);
+	if (data == node->data)
+		return (node);
+	if (node->pLeftChild)
+	{
+		if (data == node->pLeftChild->data)
+			return (node);
+	}
+	if (node->pRightChild)
+	{
+		if (data == node->pRightChild->data)
+			return (node);
+	}
+	temp = getParentNodeOfDeleteData(node->pLeftChild, data);
+	if (temp)		
+		return (temp);
+	temp = getParentNodeOfDeleteData(node->pRightChild, data);
+	if (temp)
+		return (temp);
+	return (NULL);
+}
+
+
+/*
+해당 data 를 가진 노드를 삭제, 삭제한 자리는 successor 로 대체
+*/
+void	deleteBinTreeNode(BinTree *pBinTree, int data)
+{
+	BinTreeNode	*parentNode;
+	BinTreeNode	*successor;
+
+	parentNode = getParentNodeOfDeleteData(pBinTree->pRootNode, data);
+
+	// root 노드를 삭제하는 경우
+	if (parentNode->data == data)
+	{
+		successor = replaceDeleteNodetoSuccessor(&parentNode);
+		pBinTree->pRootNode = successor;
+		return ;
+	}
+	if (parentNode->pLeftChild)
+	{
+		if (parentNode->pLeftChild->data == data)
+		{
+			replaceDeleteNodetoSuccessor(&(parentNode->pLeftChild));
+			return ;
+		}
+	}
+	if (parentNode->pRightChild)
+	{
+		if (parentNode->pRightChild->data == data)
+		{
+			replaceDeleteNodetoSuccessor(&(parentNode->pRightChild));
+			return ;
+		}
+	}
+	return ;
+}
+
+/*
+후위 순회를 통해 모든 노드 free
 */
 static void	deleteBinTreeNodeByPostorder(BinTreeNode *node)
 {
@@ -188,6 +275,9 @@ static void	deleteBinTreeNodeByPostorder(BinTreeNode *node)
 	free(node);
 }
 
+/*
+후위 순회를 통해 모든 노드 free, 전체 트리도 free
+*/
 void		deleteBinTree(BinTree* pBinTree)
 {
 	if (!pBinTree || !pBinTree->pRootNode)
