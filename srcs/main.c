@@ -37,6 +37,8 @@ int	main(int argc, char **argv)
 			break ;
 		case 7 :
 			test_binary_tree();
+		case 8 :
+			test_max_heap();
 		default :
 			break ;
 	}

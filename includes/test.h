@@ -12,5 +12,6 @@ void	test_queue();
 void	test_deque();
 void	test_queue_simulation();
 void	test_binary_tree();
+void	test_max_heap();
 
 #endif

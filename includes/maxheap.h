@@ -9,19 +9,20 @@ typedef struct MaxHeapNodeType
 
 typedef struct MaxHeapType
 {
+	int depth;
 	int maxElementCount;
 	int currentElementCount;
 	MaxHeapNode *pRootNode;
 } MaxHeap;
 
-MaxHeap	*createMaxHeap(int maxElementCount);
-int		getCurrentElementCount(MaxHeap *MaxHeap);
-void	deleteMaxHeap(MaxHeap *pMaxHeap);
-MaxHeap	*insertMaxHeapData(MaxHeap *pMaxHeap, int data);
-MaxHeap	*deleteMaxHeapData(MaxHeap *pMaxHeap);
-int		isMaxHeapFull(MaxHeap *pMaxHeap);
-int		isMaxHeapEmpty(MaxHeap *pMaxHeap);
-void	displayMaxHeap(MaxHeap *MaxHeap);
+MaxHeap		*createMaxHeap(int depth);
+int			getCurrentElementCount(MaxHeap *MaxHeap);
+void		deleteMaxHeap(MaxHeap **pMaxHeap);
+int			insertMaxHeapData(MaxHeap *pMaxHeap, int data);
+MaxHeapNode	*deleteMaxHeapData(MaxHeap *pMaxHeap);
+int			isMaxHeapFull(MaxHeap *pMaxHeap);
+int			isMaxHeapEmpty(MaxHeap *pMaxHeap);
+void		displayMaxHeap(MaxHeap *MaxHeap);
 
 #endif
 
