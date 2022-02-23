@@ -17,5 +17,7 @@
 # include "queuesimulation.h"
 # include "bintree.h"
 # include "binarytreequeue.h"
+# include "maxheap.h"
+# include "minheap.h"
 
 #endif
