@@ -16,7 +16,6 @@ typedef struct MaxHeapType
 } MaxHeap;
 
 MaxHeap		*createMaxHeap(int depth);
-int			getCurrentElementCount(MaxHeap *MaxHeap);
 void		deleteMaxHeap(MaxHeap **pMaxHeap);
 int			insertMaxHeapData(MaxHeap *pMaxHeap, int data);
 MaxHeapNode	*deleteMaxHeapData(MaxHeap *pMaxHeap);

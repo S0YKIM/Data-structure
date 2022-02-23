@@ -21,6 +21,7 @@ FILES = main \
 	   7.binary_tree_queue \
 	   8.binary_search_tree \
 	   8.maxheap \
+	   8.minheap \
 	   9.array_graph \
 	   9.linked_list_graph \
 	   10.dijkstra \
@@ -41,7 +42,8 @@ FILES_TEST = test_linked_list \
 			test_deque \
 			test_queue_simulation \
 			test_binary_tree \
-			test_max_heap
+			test_max_heap \
+			test_min_heap
 
 SRCS_DIR = srcs/
 SRCS_TEST_DIR = test/

@@ -8,10 +8,7 @@ void	test_max_heap()
 	if (!heap)
 		return ;
 	for (int i = 1; i < 14; i++)
-	{
 		insertMaxHeapData(heap, i);
-		displayMaxHeap(heap);
-	}
+	displayMaxHeap(heap);
 	deleteMaxHeap(&heap);
-	//displayMaxHeap(heap);
 }

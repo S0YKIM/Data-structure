@@ -28,7 +28,7 @@ MaxHeap	*createMaxHeap(int depth)
 	return (newHeap);
 }
 
-int		getCurrentElementCount(MaxHeap *MaxHeap)
+static int	getCurrentElementCount(MaxHeap *MaxHeap)
 {
 	if (!MaxHeap)
 		return (ERROR);
@@ -89,7 +89,7 @@ int	insertMaxHeapData(MaxHeap *pMaxHeap, int data)
 
 static int	getChildCount(MaxHeap *pMaxHeap, int index)
 {
-	if (pMaxHeap || index < 1 || index > pMaxHeap->currentElementCount)
+	if (!pMaxHeap || index < 1 || index > pMaxHeap->currentElementCount)
 		return (ERROR);
 	if (index * 2 > pMaxHeap->currentElementCount)
 		return (0);
