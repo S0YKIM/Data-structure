@@ -36,7 +36,8 @@ int	main(int argc, char **argv)
 			test_queue_simulation();
 			break ;
 		case 7 :
-			test_binary_tree();
+			// test_binary_tree();
+			//test_avl_tree();
 		case 8 :
 			//test_max_heap();
 			test_min_heap();

@@ -17,9 +17,8 @@ FILES = main \
 	   6.queue_linked_list \
 	   6.queue_simulation \
 	   7.binary_tree_traversal \
-	   7.binary_tree \
+	   7.binary_search_tree \
 	   7.binary_tree_queue \
-	   8.binary_search_tree \
 	   8.maxheap \
 	   8.minheap \
 	   9.array_graph \

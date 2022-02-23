@@ -1,5 +1,5 @@
 /*
-이진 트리
+이진 탐색 트리(Binary Search Tree)
 */
 
 #include "data_structure.h"
