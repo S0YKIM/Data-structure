@@ -1,5 +1,5 @@
-#ifndef _BIN_TREE_
-# define _BIN_TREE_
+#ifndef _AVL_TREE_
+# define _AVL_TREE_
 
 typedef struct AVLTreeNodeType
 {
@@ -20,8 +20,8 @@ AVLTreeNode	*getRootNodeAVL(AVLTree* pAVLTree);
 AVLTreeNode	*getLeftChildNodeAVL(AVLTreeNode* pNode);
 AVLTreeNode	*getRightChildNodeAVL(AVLTreeNode* pNode);
 void		deleteAVLTree(AVLTree* pAVLTree);
-void		deleteAVLTreeNode(AVLTree *pAVLTree, int data);
-void		insertAVLTreeNode(AVLTreeNode *pParentNode, int data);
+AVLTreeNode	*deleteAVLTreeNode(AVLTree *pAVLTree, AVLTreeNode *pParentNode, int key);
+AVLTreeNode	*insertAVLTreeNode(AVLTreeNode *pParentNode, int data);
 void		preorderTraversalAVLTree(AVLTreeNode *node);
 void		inorderTraversalAVLTree(AVLTreeNode *node);
 void		postorderTraversalAVLTree(AVLTreeNode *node);

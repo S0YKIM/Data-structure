@@ -6,16 +6,16 @@ AVL Tree
 
 AVLTree		*makeAVLTree(AVLTreeNode rootNode)
 {
-	AVLTree	*bintree;
+	AVLTree	*AVLtree;
 	AVLTreeNode *newNode;
 
-	bintree = (AVLTree *)calloc(1, sizeof(AVLTree));
-	if (!bintree)
+	AVLtree = (AVLTree *)calloc(1, sizeof(AVLTree));
+	if (!AVLtree)
 		return NULL;
 	newNode = (AVLTreeNode *)calloc(1, sizeof(AVLTreeNode));
 	newNode->data = rootNode.data;
-	bintree->pRootNode = newNode;
-	return (bintree);
+	AVLtree->pRootNode = newNode;
+	return (AVLtree);
 }
 
 AVLTreeNode	*getRootNodeAVL(AVLTree* pAVLTree)
@@ -141,7 +141,7 @@ static AVLTreeNode	*balanceAVLTree(AVLTreeNode *pPivotNode)
 			pPivotNode = rotateLL(pPivotNode);
 		}
 	}
-	else if (parent == -2)
+	else if (parentBF == -2)
 	{
 		// RR
 		if (rightChildBF == -1)
@@ -159,18 +159,18 @@ static AVLTreeNode	*balanceAVLTree(AVLTreeNode *pPivotNode)
 AVLTreeNode	*insertAVLTreeNode(AVLTreeNode *pParentNode, int data)
 {
 	if (!pParentNode)
-		return ;
+		return (NULL);
 	if (data > pParentNode->data)
 	{
 		if (getRightChildNodeAVL(pParentNode))
-			parentNode->pRightChild = insertAVLTreeNode(pParentNode->pRightChild, data);
+			pParentNode->pRightChild = insertAVLTreeNode(pParentNode->pRightChild, data);
 		else
 			insertRightChildNodeAVL(pParentNode, data);
 	}
 	else if (data < pParentNode->data)
 	{
 		if (getLeftChildNodeAVL(pParentNode))
-			parentNode->pLeftChild = insertAVLTreeNode(pParentNode->pLeftChild, data);
+			pParentNode->pLeftChild = insertAVLTreeNode(pParentNode->pLeftChild, data);
 		else
 			insertLeftChildNodeAVL(pParentNode, data);
 	}
@@ -238,13 +238,12 @@ AVLTreeNode	*deleteAVLTreeNode(AVLTree *pAVLTree, AVLTreeNode *pParentNode, int 
 		if (pParentNode->pRightChild)
 		{
 			successor = getSuccessor(pParentNode->pRightChild);
-
+			return (successor);
 		}
 		else
 			return (pParentNode->pLeftChild);
-		
 	}
-	
+	return (NULL);
 }
 
 /*
@@ -401,4 +400,45 @@ void		deleteAVLTree(AVLTree* pAVLTree)
 		return ;
 	deleteAVLTreeNodeByPostorder(pAVLTree->pRootNode);
 	free(pAVLTree);
+}
+
+/*
+이진 트리 순회
+*/
+
+
+/*
+전위 순회: V L R
+*/
+void	preorderTraversalAVLTree(AVLTreeNode *node)
+{
+	if (!node)
+		return ;
+	printf("data: %i ", node->data);
+	preorderTraversalAVLTree(node->pLeftChild);
+	preorderTraversalAVLTree(node->pRightChild);
+}
+
+/*
+중위 순회: L V R
+*/
+void	inorderTraversalAVLTree(AVLTreeNode *node)
+{
+	if (!node)
+		return ;
+	inorderTraversalAVLTree(node->pLeftChild);
+	printf("data: %i ", node->data);
+	inorderTraversalAVLTree(node->pRightChild);
+}
+
+/*
+후위 순회: L R V
+*/
+void	postorderTraversalAVLTree(AVLTreeNode *node)
+{
+	if (!node)
+		return ;
+	postorderTraversalAVLTree(node->pLeftChild);
+	postorderTraversalAVLTree(node->pRightChild);
+	printf("data: %i ", node->data);
 }
