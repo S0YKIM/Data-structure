@@ -7,6 +7,7 @@
 typedef struct ListNodeType
 {
 	int 	data;
+	int     weight;
 	int		degree;
 	float	coef;
 	struct ListNodeType* pLink; // 다음 노드의 주소
@@ -32,7 +33,7 @@ void	deleteLinkedList(LinkedList** pList);
 */
 void	displayLinkedList(LinkedList *pList);
 int		iterateLinkedList(LinkedList *pList);
-void	reverseLinkedList(LinkedList* pList);
+void	reverseLinkedList(LinkedList *pList);
 
 /*
 다항식의 덧셈 연결리스트

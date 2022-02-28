@@ -1,8 +1,6 @@
 #ifndef _LINKED_QUEUE_
 #define _LINKED_QUEUE_
 
-#define f(x) #x
-
 typedef enum SimStatusType 
 { 
 	arrival, // 도착(=대기 중)
