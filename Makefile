@@ -16,6 +16,7 @@ FILES = main \
 	   5.queue_array \
 	   6.queue_linked_list \
 	   6.queue_simulation \
+	   7.avl_tree \
 	   7.binary_tree_traversal \
 	   7.binary_search_tree \
 	   7.binary_tree_queue \
@@ -23,6 +24,7 @@ FILES = main \
 	   8.minheap \
 	   9.array_graph \
 	   9.linked_list_graph \
+	   9.graph_traversal \
 	   10.dijkstra \
 	   10.floyd \
 	   10.kruskal \
@@ -41,8 +43,12 @@ FILES_TEST = test_linked_list \
 			test_deque \
 			test_queue_simulation \
 			test_binary_tree \
+			test_avl_tree \
 			test_max_heap \
-			test_min_heap
+			test_min_heap \
+			test_array_graph \
+			test_linked_graph \
+			test_graph_traversal
 
 SRCS_DIR = srcs/
 SRCS_TEST_DIR = test/

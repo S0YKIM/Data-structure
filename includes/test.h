@@ -15,5 +15,8 @@ void	test_binary_tree();
 void	test_avl_tree();
 void	test_max_heap();
 void	test_min_heap();
+void	test_array_graph();
+void	test_linked_graph();
+void	test_graph_traversal();
 
 #endif

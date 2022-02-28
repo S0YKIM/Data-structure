@@ -37,10 +37,17 @@ int	main(int argc, char **argv)
 			break ;
 		case 7 :
 			// test_binary_tree();
-			//test_avl_tree();
+			test_avl_tree();
+			break ;
 		case 8 :
 			//test_max_heap();
 			test_min_heap();
+			break ;
+		case 9 :
+			//test_array_graph();
+			//test_linked_graph();
+			test_graph_traversal();
+			break ;
 		default :
 			break ;
 	}

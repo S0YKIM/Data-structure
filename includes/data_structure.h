@@ -16,8 +16,11 @@
 # include "linkedqueue.h"
 # include "queuesimulation.h"
 # include "bintree.h"
+# include "avltree.h"
 # include "binarytreequeue.h"
 # include "maxheap.h"
 # include "minheap.h"
+# include "arraygraph.h"
+# include "linkedgraph.h"
 
 #endif
