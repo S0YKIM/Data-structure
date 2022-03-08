@@ -336,9 +336,14 @@ int	deleteLinkedGraph(LinkedGraph** pGraph)
 	if (!pGraph || !(*pGraph))
 		return (print_error_message("Invalid graph."));
 	for (int i = 0; i < (*pGraph)->maxVertexCount; i++)
+	{
 		removeVertexLG(*pGraph, i);
+		free((*pGraph)->ppAdjEdge[i]);
+	}
 	free((*pGraph)->pVertex);
+	free((*pGraph)->ppAdjEdge);
 	free(*pGraph);
 	*pGraph = NULL;
 	return (TRUE);
 }
+

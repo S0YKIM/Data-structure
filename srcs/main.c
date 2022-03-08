@@ -9,7 +9,7 @@ int	main(int argc, char **argv)
 		printf("Two arguments needed.");
 		return (0);
 	}
-	number = argv[1][0] - '0';
+	number = atoi(argv[1]);
 
 	switch (number)
 	{
@@ -47,6 +47,9 @@ int	main(int argc, char **argv)
 			//test_array_graph();
 			//test_linked_graph();
 			test_graph_traversal();
+			break ;
+		case 10 :
+			test_floyd();
 			break ;
 		default :
 			break ;

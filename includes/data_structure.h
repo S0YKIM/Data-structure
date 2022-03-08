@@ -22,5 +22,6 @@
 # include "minheap.h"
 # include "arraygraph.h"
 # include "linkedgraph.h"
+# include "algorithm.h"
 
 #endif

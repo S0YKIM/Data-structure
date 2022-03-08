@@ -48,7 +48,8 @@ FILES_TEST = test_linked_list \
 			test_min_heap \
 			test_array_graph \
 			test_linked_graph \
-			test_graph_traversal
+			test_graph_traversal \
+			test_algorithm
 
 SRCS_DIR = srcs/
 SRCS_TEST_DIR = test/

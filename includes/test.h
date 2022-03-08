@@ -18,5 +18,6 @@ void	test_min_heap();
 void	test_array_graph();
 void	test_linked_graph();
 void	test_graph_traversal();
+void	test_floyd();
 
 #endif
