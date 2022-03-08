@@ -28,6 +28,9 @@ void	test_floyd()
 	printf("------------- Floyd-warshall -------------\n");
 	displayArrayGraph(myGraph);
 	printf("------------------------------------------\n");
+	printf("---------------- All Paths ---------------\n");
+	displayArrayGraph(path);
+	printf("------------------------------------------\n");
 	printf("------------- Shortest Path --------------\n");
 	print_minimum_path(path, 0, 4);
 	printf("------------------------------------------\n");

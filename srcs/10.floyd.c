@@ -9,6 +9,7 @@ ArrayGraph	*floyd(ArrayGraph *graph)
 	int			infinity = 100000;
 	ArrayGraph	*path;
 
+	// 인접하지 않은 노드까지의 경로 길이 무한대로 초기화
 	for (int i = 0; i < graph->maxVertexCount; i++)
 	{
 		for (int j = 0; j < graph->maxVertexCount; j++)
@@ -19,6 +20,8 @@ ArrayGraph	*floyd(ArrayGraph *graph)
 				graph->ppAdjEdge[i][j] = infinity;
 		}
 	}
+
+	// 경유지를 저장하는 이차원 배열 초기화
 	path = createArrayGraph(graph->maxVertexCount);
 	for (int i = 0; i < graph->maxVertexCount; i++)
 	{
@@ -27,6 +30,7 @@ ArrayGraph	*floyd(ArrayGraph *graph)
 			path->ppAdjEdge[i][j] = 0;
 	}
 
+	// c: 경유지, start: 시작지, end: 도착지
 	for (int c = 0; c < graph->maxVertexCount; c++)
 	{
 		for (int start = 0; start < graph->maxVertexCount; start++)
@@ -56,6 +60,7 @@ static void	print_passed_path(ArrayGraph *path, int start, int end)
 	}
 }
 
+// start ~ end 사이의 최단 경로 출력
 void	print_minimum_path(ArrayGraph *path, int start, int end)
 {
 	if (!path)
