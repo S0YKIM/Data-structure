@@ -49,7 +49,8 @@ int	main(int argc, char **argv)
 			test_graph_traversal();
 			break ;
 		case 10 :
-			test_floyd();
+			//test_floyd();
+			test_dijkstra();
 			break ;
 		default :
 			break ;

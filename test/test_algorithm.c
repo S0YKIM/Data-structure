@@ -28,3 +28,28 @@ void	test_floyd()
 	//deleteArrayGraph(&myGraph);
 	//deleteArrayGraph(&path);
 }
+
+void	test_dijkstra()
+{
+	LinkedGraph	*myGraph;
+
+	myGraph = createLinkedGraph(6);
+	addVertexLG(myGraph, 0);
+	addVertexLG(myGraph, 1);
+	addVertexLG(myGraph, 2);
+	addVertexLG(myGraph, 3);
+	addVertexLG(myGraph, 4);
+	addVertexLG(myGraph, 5);
+
+	addEdgewithWeightLG(myGraph, 0, 1, 1);
+	addEdgewithWeightLG(myGraph, 0, 2, 4);
+	addEdgewithWeightLG(myGraph, 1, 2, 2);
+	addEdgewithWeightLG(myGraph, 2, 3, 1);
+	addEdgewithWeightLG(myGraph, 3, 4, 8);
+	addEdgewithWeightLG(myGraph, 3, 5, 3);
+	addEdgewithWeightLG(myGraph, 4, 5, 4);
+
+	dijkstra(myGraph, 0);
+	//deleteArrayGraph(&myGraph);
+	//deleteArrayGraph(&path);
+}
