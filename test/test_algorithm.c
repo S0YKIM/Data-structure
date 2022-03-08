@@ -21,12 +21,16 @@ void	test_floyd()
 	addEdgewithWeightAG(myGraph, 3, 5, 3);
 	addEdgewithWeightAG(myGraph, 4, 5, 4);
 
-	path = floyd(myGraph);
+	printf("------------- Original Graph -------------\n");
 	displayArrayGraph(myGraph);
-	displayArrayGraph(path);
+	printf("------------------------------------------\n");
+	path = floyd(myGraph);
+	printf("------------- Floyd-warshall -------------\n");
+	displayArrayGraph(myGraph);
+	printf("------------------------------------------\n");
+	printf("------------- Shortest Path --------------\n");
 	print_minimum_path(path, 0, 4);
-	//deleteArrayGraph(&myGraph);
-	//deleteArrayGraph(&path);
+	printf("------------------------------------------\n");
 }
 
 void	test_dijkstra()

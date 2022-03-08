@@ -51,7 +51,7 @@ static void	print_passed_path(ArrayGraph *path, int start, int end)
 	if (path->ppAdjEdge[start][end] != 0)
 	{
 		print_passed_path(path, start, path->ppAdjEdge[start][end]);
-		printf("%i ->", path->ppAdjEdge[start][end]);
+		printf("%i -> ", path->ppAdjEdge[start][end]);
 		print_passed_path(path, path->ppAdjEdge[start][end], end);
 	}
 }
@@ -60,7 +60,7 @@ void	print_minimum_path(ArrayGraph *path, int start, int end)
 {
 	if (!path)
 		return ;
-	printf("%i ->", start);
+	printf("%i -> ", start);
 	print_passed_path(path, start, end);
 	printf("%i\n", end);
 }
