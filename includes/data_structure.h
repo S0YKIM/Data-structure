@@ -23,5 +23,6 @@
 # include "arraygraph.h"
 # include "linkedgraph.h"
 # include "algorithm.h"
+# include "sort.h"
 
 #endif

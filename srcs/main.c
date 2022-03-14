@@ -52,6 +52,9 @@ int	main(int argc, char **argv)
 			test_floyd();
 			// test_dijkstra();
 			break ;
+		case 11 :
+			test_merge_sort();
+			break ;
 		default :
 			break ;
 	}

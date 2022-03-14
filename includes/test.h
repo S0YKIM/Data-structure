@@ -20,5 +20,6 @@ void	test_linked_graph();
 void	test_graph_traversal();
 void	test_floyd();
 void	test_dijkstra();
+void	test_merge_sort();
 
 #endif

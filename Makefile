@@ -1,7 +1,7 @@
 NAME = data_structure
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 
 FILES = main \
 	   1.array \
@@ -49,7 +49,8 @@ FILES_TEST = test_linked_list \
 			test_array_graph \
 			test_linked_graph \
 			test_graph_traversal \
-			test_algorithm
+			test_algorithm \
+			test_sort
 
 SRCS_DIR = srcs/
 SRCS_TEST_DIR = test/
