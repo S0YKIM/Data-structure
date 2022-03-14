@@ -22,5 +22,6 @@ void	test_floyd();
 void	test_dijkstra();
 void	test_merge_sort();
 void	test_quick_sort();
+void	test_insertion_sort();
 
 #endif

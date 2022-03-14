@@ -91,3 +91,27 @@ void	quick_sort(int *array, int start, int end)
 	quick_sort(array, start, l - 1);
 	quick_sort(array, l + 1, end);
 }
+
+void	insertion_sort(int *array, int end)
+{
+	int	i;
+	int	tmp;
+
+	if (!array)
+		return ;
+	if (end == 0)
+		return ;
+	insertion_sort(array, end - 1);
+
+	tmp = array[end];
+	i = end - 1;
+	while (i >= 0)
+	{
+		if (tmp < array[i])
+			array[i + 1] = array[i];
+		else
+			break ;
+		i--;
+	}
+	array[i + 1] = tmp;
+}

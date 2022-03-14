@@ -8,4 +8,7 @@ void	merge(int *array, int start, int mid, int end);
 /* 퀵 정렬 */
 void	quick_sort(int *array, int start, int end);
 
+/* 삽입 정렬 */
+void	insertion_sort(int *array, int end);
+
 #endif
