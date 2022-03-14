@@ -53,7 +53,8 @@ int	main(int argc, char **argv)
 			// test_dijkstra();
 			break ;
 		case 11 :
-			test_merge_sort();
+			// test_merge_sort();
+			test_quick_sort();
 			break ;
 		default :
 			break ;

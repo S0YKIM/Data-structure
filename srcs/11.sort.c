@@ -8,40 +8,40 @@ Insertion (~16:00)
 
 void	merge(int *array, int start, int mid, int end)
 {
-	int	*left;
-	int	*right;
+	int	*l;
+	int	*r;
 
-	left = (int *)malloc(sizeof(int) * (mid - start + 1));
-	if (!left)
+	l = (int *)malloc(sizeof(int) * (mid - start + 1));
+	if (!l)
 		return ;
-	right = (int *)malloc(sizeof(int) * (end - mid));
-	if (!right)
+	r = (int *)malloc(sizeof(int) * (end - mid));
+	if (!r)
 	{
-		free(left);
+		free(l);
 		return ;
 	}
 
 	for (int i = 0; i < mid - start; i++)
-		left[i] = array[start + i];
+		l[i] = array[start + i];
 	for (int i = 0; i < end - mid + 1; i++)
-		right[i] = array[mid + i];
+		r[i] = array[mid + i];
 
 	int	l_idx = 0, r_idx = 0, a_idx = start;
 	while ((l_idx < mid - start) && (r_idx < end - mid + 1))
 	{
-		if (left[l_idx] < right[r_idx])
-			array[a_idx++] = left[l_idx++];
+		if (l[l_idx] < r[r_idx])
+			array[a_idx++] = l[l_idx++];
 		else
-			array[a_idx++] = right[r_idx++];
+			array[a_idx++] = r[r_idx++];
 	}
 
 	while (l_idx < mid - start)
-		array[a_idx++] = left[l_idx++];
+		array[a_idx++] = l[l_idx++];
 	while (r_idx < end - mid + 1)
-		array[a_idx++] = right[r_idx++];
+		array[a_idx++] = r[r_idx++];
 
-	free(left);
-	free(right);
+	free(l);
+	free(r);
 }
 
 void	merge_sort(int *array, int start, int end)
@@ -56,4 +56,38 @@ void	merge_sort(int *array, int start, int end)
 	merge_sort(array, start, mid - 1);
 	merge_sort(array, mid, end);
 	merge(array, start, mid, end);
+}
+
+static void	swap(int *a, int *b)
+{
+	int temp;
+
+	temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
+void	quick_sort(int *array, int start, int end)
+{
+	int	l;
+	int	r;
+
+	if (start >= end)
+		return ;
+
+	l = start;
+	r = end;
+
+	while (l < r)
+	{
+		while (array[l] <= array[end] && l < end)
+			l++;
+		while (array[r] >= array[end] && r > l)
+			r--;
+		swap(array + l, array + r);
+	}
+
+	swap(array + l, array + end);
+	quick_sort(array, start, l - 1);
+	quick_sort(array, l + 1, end);
 }
